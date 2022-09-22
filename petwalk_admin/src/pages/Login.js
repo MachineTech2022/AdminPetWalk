@@ -21,7 +21,9 @@ export default function Login(){
                     </Form.Item>
                     <Row justify="center">
                         <Form.Item>
-                            <Button className="button" type="primary">Iniciar Sesión</Button>
+                            <a href="/MenuMajor">
+                                <Button className="button" type="primary">Iniciar Sesión</Button>
+                            </a>
                         </Form.Item>
                     </Row>
                 </Form>
@@ -29,3 +31,5 @@ export default function Login(){
         </div>
     )
 }
+
+//SACAR EL <a>

@@ -1,14 +1,15 @@
 import React from "react";
 import { Route } from "react-router-dom"; 
 import {Row,Layout} from "antd";
-import "./LayoutMajor.scss";
+import "./MenuDashboard.scss";
+//Importando componentes
+
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader";
 
-export default function LayoutMajor(props){
+export default function MenuDashboard(props){
     console.log(props);
-    const {routes}= props;
     const {Content} = Layout;
 
     return(
@@ -18,22 +19,12 @@ export default function LayoutMajor(props){
             </Row>
             <Layout>
                 <Content>
-                    <LoadRouters routes={routes}/>
+                    <p>Aqui menu target de MenuDashboard</p>
+                    <p>Ventas</p>
+                    <p>Paseos/Sector/Paseador</p>
                 </Content>
             </Layout>
         </Layout>
     )
 }
 
-function LoadRouters({routes}) {
-    console.log(routes);
-    return routes.map((route,index)=>
-        <Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            component={route.component}
-
-        />
-    )
-}

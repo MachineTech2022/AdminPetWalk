@@ -1,0 +1,26 @@
+@import "../scss/index.scss";
+
+
+
+.content-target{
+    display: flex;
+    height: 554px;
+    align-items: center;
+    justify-content: center;
+    .target1{ 
+        width: 200px;
+        height: 200px;
+    }
+    
+    .target2{
+        width: 200px;
+        height: 200px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    
+    .target3{
+        width: 200px;
+        height: 200px;
+    }
+}
