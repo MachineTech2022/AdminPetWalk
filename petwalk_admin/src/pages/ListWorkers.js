@@ -76,21 +76,21 @@ export default function ListWorkers(){
             dataIndex: 'documento',
             key: 'documento',
             render: fila => solicitudes.map((solicitud)=>
-                <a href={"http://localhost:4000/"+solicitud.documentos[0]}>Ver</a>)
+                <a href={"http://localhost:4000/"+solicitud.documentos[0]} target={"_blank"} rel={"noreferrer noopener"}>Ver</a>)
         },
         {
             title: 'Foto carnet A',
             dataIndex: 'documento1',
             key: 'documento',
             render: fila => solicitudes.map((solicitud)=>
-                <a href={"http://localhost:4000/"+solicitud.documentos[1]}>Ver</a>)
+                <a href={"http://localhost:4000/"+solicitud.documentos[1]} target={"_blank"} rel={"noreferrer noopener"} >Ver</a>)
         },
         {
             title: 'Foto carnet B',
             dataIndex: 'documento2',
             key: 'documento',
             render: fila => solicitudes.map((solicitud)=>
-                <a href={"http://localhost:4000/"+solicitud.documentos[2]}>Ver</a>)
+                <a href={"http://localhost:4000/"+solicitud.documentos[2]} target={"_blank"} rel={"noreferrer noopener"}>Ver</a>)
         },
     ]
     //console.log(solicitudes.map(solicitud => (key={solicitud.id})))
