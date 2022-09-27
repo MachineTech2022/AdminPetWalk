@@ -1,7 +1,7 @@
 import  React,{ useEffect, useState} from "react";
 import './ListWorkers.scss';
 import axios from 'axios';
-import { Table,Row} from "antd";
+import { Table,Button,Row} from "antd";
 
 
 
@@ -92,60 +92,20 @@ export default function ListWorkers(){
             render: fila => solicitudes.map((solicitud)=>
                 <a href={"http://localhost:4000/"+solicitud.documentos[2]} target={"_blank"} rel={"noreferrer noopener"}>Ver</a>)
         },
+        {
+            title: 'Solicitud',
+            dataIndex: "solicitudPendiente",
+            key: "solicitudPendiente",
+            render: fila => (fila=== true) ? <Button type="primary" danger>Desactivar</Button> : <Button>Activar</Button>
+        },
+        
     ]
     //console.log(solicitudes.map(solicitud => (key={solicitud.id})))
     return(
         <div>
             <TitleHeader></TitleHeader>
             <Table dataSource={solicitudes} columns={columns}/> 
-             
         </div>
-        
-        
-        /*<div>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Comuna</th>
-                    <th>Genero</th>
-                    <th>Telefono</th>
-                    <th>Correo</th>
-                    <th>Rut</th>
-                    <th>Direccion</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Antecedentes</th>
-                    <th>Carnet Frontal</th>
-                    <th>Carnet Trasero</th>
-                </tr>
-            </thead>
-            <tbody>
-            
-            {
-                solicitudes.map(solicitud=>(
-            <tr key={solicitud.id}>
-                    <td>{solicitud.nombre}</td>
-                    <td>{solicitud.apellido}</td>
-                    <td>{solicitud.comuna}</td>
-                    <td>{solicitud.genero}</td>
-                    <td>{solicitud.telefono}</td>
-                    <td>{solicitud.correo}</td>
-                    <td>{solicitud.rut}</td>
-                    <td>{solicitud.direccion}</td>
-                    <td>{solicitud.fechaNacimiento}</td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[0]}>Descargar</a></td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[1]}>Descargar</a></td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[2]}>Descargar</a></td>
-
-            </tr>))
-            }
-            </tbody>      
-            <div>
-                {solicitudes.map((solicitud)=>
-                <h1>{solicitud.documentos[0]}</h1>)}
-            </div> 
-            
-        </div>*/
     )
 }
 
