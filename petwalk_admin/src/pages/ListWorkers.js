@@ -1,7 +1,7 @@
 import  React,{ useEffect, useState} from "react";
 import './ListWorkers.scss';
 import axios from 'axios';
-import { Table,Button,Row} from "antd";
+import { Table,Button} from "antd";
 
 
 
@@ -72,31 +72,17 @@ export default function ListWorkers(){
             key: 'fechaNacimiento'
         },
         {
-            title: 'Antecedentes',
-            dataIndex: 'documento',
-            key: 'documento',
+            title: 'Documentos',
+            dataIndex: 'documentos',
+            key: 'documentos',
             render: fila => solicitudes.map((solicitud)=>
-                <a href={"http://localhost:4000/"+solicitud.documentos[0]} target={"_blank"} rel={"noreferrer noopener"}>Ver</a>)
-        },
-        {
-            title: 'Foto carnet A',
-            dataIndex: 'documento1',
-            key: 'documento',
-            render: fila => solicitudes.map((solicitud)=>
-                <a href={"http://localhost:4000/"+solicitud.documentos[1]} target={"_blank"} rel={"noreferrer noopener"} >Ver</a>)
-        },
-        {
-            title: 'Foto carnet B',
-            dataIndex: 'documento2',
-            key: 'documento',
-            render: fila => solicitudes.map((solicitud)=>
-                <a href={"http://localhost:4000/"+solicitud.documentos[2]} target={"_blank"} rel={"noreferrer noopener"}>Ver</a>)
+                <Button href={"/ListDocument"} target={"_blank"} rel={"noreferrer noopener"}>Ver</Button>)
         },
         {
             title: 'Solicitud',
             dataIndex: "solicitudPendiente",
             key: "solicitudPendiente",
-            render: fila => (fila=== true) ? <Button type="primary" danger>Desactivar</Button> : <Button>Activar</Button>
+            render: fila => <><Button type="primary">Aceptar</Button>{" "} <Button type="primary" danger>Rechazar</Button></>
         },
         
     ]
@@ -108,6 +94,9 @@ export default function ListWorkers(){
         </div>
     )
 }
+
+//ejemplo para poder poner condiciones en el render
+//render: fila => (fila=== true) ? <Button type="primary">Activar</Button> : <Button type="primary">Activar</Button>
 
 /*
 <div>
