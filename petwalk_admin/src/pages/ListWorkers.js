@@ -9,15 +9,7 @@ import { Table,Button,Tag} from "antd";
 import TitleHeader from "../component/TitleHeader"; 
 
 
-function AceptarSolicitud(id){
-    console.log(id)
-    axios.patch('http://localhost:4000/api/trabajador/aceptar/'+id)
-}
 
-function RechazarSolicitud(id){
-    console.log(id)
-    axios.patch('http://localhost:4000/api/trabajador/rechazar/'+id)
-}
 
 
 
@@ -25,18 +17,39 @@ function RechazarSolicitud(id){
 
 
 export default function ListWorkers(){
+
+
+
+    function AceptarSolicitud(id){
+        console.log(id)
+        axios.patch('http://localhost:4000/api/trabajador/aceptar/'+id)
+        window.location.reload()
+    }
     
+    function RechazarSolicitud(id){
+        console.log(id)
+        axios.patch('http://localhost:4000/api/trabajador/rechazar/'+id)
+        window.location.reload()
+    }
+        
     
+    //Para consumir la api de Node
     const [solicitudes, setSolicitud] = useState([])
     useEffect(()=>{
             axios.get('http://localhost:4000/api/trabajador')
             .then(res => {
                 setSolicitud(res.data)
-                console.log(res._id)
-            }).catch(err=>{
+                
+            })
+            
+            .catch(err=>{
                 console.log(err)
             })
         }, [])
+
+        
+         
+
     
     
         const columns= [
@@ -119,6 +132,7 @@ export default function ListWorkers(){
 
 
 /*
+()=>AceptarSolicitud(fila)
 render: fila => <><Button onClick= {()=>console.log(columns.id)} type="primary">Aceptar</Button>{" "} <Button type="primary" danger>Rechazar</Button></>
   <div>
             <thead>
