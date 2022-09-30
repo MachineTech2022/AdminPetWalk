@@ -1,12 +1,27 @@
 import  React,{ useEffect, useState} from "react";
 import './ListWorkers.scss';
 import axios from 'axios';
-import { Table,Button} from "antd";
+import { Table,Button,Tag} from "antd";
 
 
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
+
+
+function AceptarSolicitud(id){
+    console.log(id)
+    axios.patch('http://localhost:4000/api/trabajador/aceptar/'+id)
+}
+
+function RechazarSolicitud(id){
+    console.log(id)
+    axios.patch('http://localhost:4000/api/trabajador/rechazar/'+id)
+}
+
+
+
+
 
 
 export default function ListWorkers(){
@@ -16,90 +31,92 @@ export default function ListWorkers(){
     useEffect(()=>{
             axios.get('http://localhost:4000/api/trabajador')
             .then(res => {
-                //console.log(res);
                 setSolicitud(res.data)
+                console.log(res._id)
             }).catch(err=>{
                 console.log(err)
             })
         }, [])
     
     
+        const columns= [
+            {
+                title: 'Nombre',
+                dataIndex: 'nombre',
+                key: 'nombre'
+                
+            },
+            {
+                title: 'Apellido',
+                dataIndex: 'apellido',
+                key: 'apellido'
+            },
+            {
+                title: 'Comuna',
+                dataIndex: 'comuna',
+                key: 'comuna'
+            },
+            {
+                title: 'Genero',
+                dataIndex: 'genero',
+                key: 'genero'
+            },
+            {
+                title: 'Telefono',
+                dataIndex: 'telefono',
+                key: 'telefono'
+            },
+            {
+                title: 'Correo',
+                dataIndex: 'correo',
+                key: 'correo'
+            },
+            {
+                title: 'Rut',
+                dataIndex: 'rut',
+                key: 'rut'
+            },
+            {
+                title: 'Dirección',
+                dataIndex: 'direccion',
+                key: 'direccion'
+            },
+            {
+                title: 'Fecha de nacimiento',
+                dataIndex: 'fechaNacimiento',
+                key: 'fechaNacimiento'
+            },
+            {
+                title: 'Documentos',
+                dataIndex: "documentos",
+                key: "documentos",
+                render: fila => <><a href={"http://localhost:4000/" + fila[0]} target={"_blank"} rel={"noreferrer noopener"}>   <Tag>Antecedentes</Tag></a>
+                <a href={"http://localhost:4000/" + fila[1]} target={"_blank"} rel={"noreferrer noopener"}>   <Tag>Foto Carnet A</Tag></a>
+                <a href={"http://localhost:4000/" + fila[2]} target={"_blank"} rel={"noreferrer noopener"}>   <Tag>Foto Carnet B</Tag></a>
+                </>
+            },
+            {   
+                title: 'Solicitud',
+                dataIndex: "_id",
+                key: "_id",
+                render: fila => <><Button onClick={()=>AceptarSolicitud(fila)}>Aceptar</Button><Button onClick={()=>RechazarSolicitud(fila)}>Rechazar</Button></>
+            },
+            
+        ]
     
-    const columns= [
-        {
-            title: 'Nombre',
-            dataIndex: 'nombre',
-            key: 'nombre'
-        },
-        {
-            title: 'Apellido',
-            dataIndex: 'apellido',
-            key: 'apellido'
-        },
-        {
-            title: 'Comuna',
-            dataIndex: 'comuna',
-            key: 'comuna'
-        },
-        {
-            title: 'Genero',
-            dataIndex: 'genero',
-            key: 'genero'
-        },
-        {
-            title: 'Telefono',
-            dataIndex: 'telefono',
-            key: 'telefono'
-        },
-        {
-            title: 'Correo',
-            dataIndex: 'correo',
-            key: 'correo'
-        },
-        {
-            title: 'Rut',
-            dataIndex: 'rut',
-            key: 'rut'
-        },
-        {
-            title: 'Dirección',
-            dataIndex: 'direccion',
-            key: 'direccion'
-        },
-        {
-            title: 'Fecha de nacimiento',
-            dataIndex: 'fechaNacimiento',
-            key: 'fechaNacimiento'
-        },
-        {
-            title: 'Documentos',
-            dataIndex: 'documentos',
-            key: 'documentos',
-            render: fila => solicitudes.map((solicitud)=>
-                <Button href={"/ListDocument"} target={"_blank"} rel={"noreferrer noopener"}>Ver</Button>)
-        },
-        {
-            title: 'Solicitud',
-            dataIndex: "solicitudPendiente",
-            key: "solicitudPendiente",
-            render: fila => <><Button type="primary">Aceptar</Button>{" "} <Button type="primary" danger>Rechazar</Button></>
-        },
-        
-    ]
-    //console.log(solicitudes.map(solicitud => (key={solicitud.id})))
     return(
-        <div>
+        <>
             <TitleHeader></TitleHeader>
-            <Table dataSource={solicitudes} columns={columns}/> 
-        </div>
+            <Table dataSource={solicitudes} columns={columns}/>
+             
+        </>
     )
 }
 
-//ejemplo para poder poner condiciones en el render
-//render: fila => (fila=== true) ? <Button type="primary">Activar</Button> : <Button type="primary">Activar</Button>
 
 /*
-<div>
+render: fila => <><Button onClick= {()=>console.log(columns.id)} type="primary">Aceptar</Button>{" "} <Button type="primary" danger>Rechazar</Button></>
+  <div>
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -114,12 +131,13 @@ export default function ListWorkers(){
                     <th>Antecedentes</th>
                     <th>Carnet Frontal</th>
                     <th>Carnet Trasero</th>
+                    <th>Solicitud</th>
                 </tr>
             </thead>
             <tbody>
             {
                 solicitudes.map(solicitud=>(
-            <tr key={solicitud.id}>
+            <tr key={solicitud._id}>
                     <td>{solicitud.nombre}</td>
                     <td>{solicitud.apellido}</td>
                     <td>{solicitud.comuna}</td>
@@ -129,12 +147,13 @@ export default function ListWorkers(){
                     <td>{solicitud.rut}</td>
                     <td>{solicitud.direccion}</td>
                     <td>{solicitud.fechaNacimiento}</td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[0]}>Descargar</a></td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[1]}>Descargar</a></td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[2]}>Descargar</a></td>
-
+                    <td><a href={'http://localhost:4000/'+solicitud.documentos[0]}>Ver</a></td>
+                    <td><a href={'http://localhost:4000/'+solicitud.documentos[1]}>Ver</a></td>
+                    <td><a href={'http://localhost:4000/'+solicitud.documentos[2]}>Ver</a></td>
+                    <td><Button onClick= {()=>console.log(solicitud._id)}>Aceptar</Button><Button>Rechazar</Button></td>
             </tr>))
             }
-            </tbody>        
-        </div>
-*/
+            </tbody>   
+            </div>  
+*/ 
+

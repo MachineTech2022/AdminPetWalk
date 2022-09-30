@@ -9,7 +9,7 @@ import Cards from "../component/Cards";
 import TitleHeader from "../component/TitleHeader";
 
 export default function MenuMajor(props){
-    console.log(props);
+    //console.log(props);
     const {routes}= props;
     const {Content} = Layout;
 
@@ -31,7 +31,6 @@ export default function MenuMajor(props){
 }
 
 function LoadRouters({routes}) {
-    console.log(routes);
     return routes.map((route,index)=>
         <Route
             key={index}
