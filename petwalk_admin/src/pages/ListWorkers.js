@@ -90,16 +90,20 @@ export default function ListWorkers(){
                 title: 'Documentos',
                 dataIndex: "documentos",
                 key: "documentos",
-                render: fila => <><a href={"http://localhost:4000/" + fila[0]} target={"_blank"} rel={"noreferrer noopener"}>   <Tag>Antecedentes</Tag></a>
-                <a href={"http://localhost:4000/" + fila[1]} target={"_blank"} rel={"noreferrer noopener"}>   <Tag>Foto Carnet A</Tag></a>
-                <a href={"http://localhost:4000/" + fila[2]} target={"_blank"} rel={"noreferrer noopener"}>   <Tag>Foto Carnet B</Tag></a>
+                render: fila => <><a href={"http://localhost:4000/" + fila[0]} target={"_blank"} rel={"noreferrer noopener"}>
+                    <Tag className="tagDocumento" color={'yellow'}>Antecedentes</Tag></a>
+                <a href={"http://localhost:4000/" + fila[1]} target={"_blank"} rel={"noreferrer noopener"}>
+                    <Tag className="tagDocumento1" color={'yellow'}>Foto Carnet A</Tag></a>
+                <a href={"http://localhost:4000/" + fila[2]} target={"_blank"} rel={"noreferrer noopener"}>
+                    <Tag className="tagDocumento2" color={'yellow'}>Foto Carnet B</Tag></a>
                 </>
             },
             {   
                 title: 'Solicitud',
                 dataIndex: "_id",
                 key: "_id",
-                render: fila => <><Button onClick={()=>AceptarSolicitud(fila)}>Aceptar</Button><Button onClick={()=>RechazarSolicitud(fila)}>Rechazar</Button></>
+                render: fila => <><Button id="buttonDocument" onClick={()=>AceptarSolicitud(fila)} type='primary' >Aceptar</Button>
+                <Button id="buttonDocument" danger onClick={()=>RechazarSolicitud(fila)}>Rechazar</Button></>
             },
             
         ]
