@@ -1,7 +1,8 @@
 import  React,{ useEffect, useState} from "react";
 import './ListRequest.scss';
 import axios from 'axios';
-import { Table,Button,Tag} from "antd";
+import { Table,Button,Tag,message,notification} from "antd";
+
 
 
 
@@ -17,19 +18,38 @@ import TitleHeader from "../component/TitleHeader";
 
 
 export default function List(){
-
-
+    function delay(n){
+        return new Promise(function(resolve){
+            setTimeout(resolve,n*1000);
+        });
+    }
+    
+    function ReloadPage(){
+        window.location.reload()
+    }
 
     function AceptarSolicitud(id){
         console.log(id)
         axios.patch('http://localhost:4000/api/trabajador/aceptar/'+id)
-        window.location.reload()
+        notification['success']({
+            message:'Solicitud Aceptada'
+        })
+        
+        setTimeout(ReloadPage,3000)
+
+        
+        
     }
     
     function RechazarSolicitud(id){
         console.log(id)
         axios.patch('http://localhost:4000/api/trabajador/rechazar/'+id)
-        window.location.reload()
+        notification['success']({
+            message:'Solicitud Rechazada'
+        })
+        
+        setTimeout(ReloadPage,3000)
+        
     }
         
     

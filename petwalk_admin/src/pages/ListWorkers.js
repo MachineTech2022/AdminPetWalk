@@ -1,21 +1,10 @@
 import  React,{ useEffect, useState} from "react";
-import './ListConsumers.scss';
+import './ListWorkers.scss';
 import axios from 'axios';
-import { Table,Button,Input} from "antd";
-import {SearchOutlined} from '@ant-design/icons'
-
-
+import { Table,Button} from "antd";
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
-
-
-
-
-
-
-
-
 
 export default function ListConsumers(){
 
@@ -27,17 +16,17 @@ export default function ListConsumers(){
         window.location.reload()
     }*/
     
-    function BanConsumers(id){
+    /*function BanWorkers(id){
         console.log(id)
         axios.patch('http://localhost:4000/api/consumidor/banear/'+id)
         window.location.reload()
-    }
+    }*/
         
     
     //Para consumir la api de Node
     const [solicitudes, setSolicitud] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/consumidor')
+            axios.get('http://localhost:4000/api/trabajador/all')
             .then(res => {
                 setSolicitud(res.data)
                 
@@ -49,6 +38,8 @@ export default function ListConsumers(){
         }, [])
 
         
+         
+
     
     
         const columns= [
@@ -76,46 +67,12 @@ export default function ListConsumers(){
             {
                 title: 'Correo',
                 dataIndex: 'correo',
-                key: 'correo',
-                filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters})=> {
-                    return <>
-                    <Input
-                    autoFocus 
-                    placeholder="Search email"
-                    value={selectedKeys[0]} 
-                    onChange={(e)=>{
-                        setSelectedKeys(e.target.value ? [e.target.value]: [] );
-                        confirm({closeDropdown:false});
-                    }}
-                    onPressEnter={()=>{
-                        confirm()
-                    }}
-                    onBlur={()=>{
-                        confirm()
-                    }}></Input>
-                    <div id="divButtonSearch">
-                        <Button id="buttonSearch" onClick={()=>
-                            {
-                                confirm();
-                            }}
-                            type="primary">Search
-                        </Button>
-                        <Button id="buttonSearch" onClick={()=>
-                            {
-                                clearFilters();
-                                confirm();
-                            }}
-                            type="danger">Reset
-                        </Button>
-                    </div>
-                    </>
-                },
-                filterIcon:()=>{
-                    return <SearchOutlined/>
-                },
-                onFilter:(value,record)=>{
-                    return record.correo.toLowerCase().includes(value.toLowerCase())
-                }
+                key: 'correo'
+            },
+            {
+                title: 'Rut',
+                dataIndex: 'rut',
+                key: 'rut'
             },
             {
                 title: 'Dirección',
@@ -139,7 +96,7 @@ export default function ListConsumers(){
                 key: 'activo',
                 render: (fila, row) => 
                 (fila === false) ? <Button type="primary">Activar</Button>:
-                <Button onClick={()=>BanConsumers(row._id)} danger>Desactivar</Button>
+                <Button onClick={()=>(row._id)} danger>Desactivar</Button>
             },
 
             

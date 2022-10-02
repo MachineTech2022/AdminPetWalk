@@ -11,7 +11,7 @@ export default function Cards(){
                     <p>Solicitud Paseadores</p>   
                 </Card>
             </a>
-            <a href="/">
+            <a href="/ListWorkers">
                 <Card className="target2" >
                     <p>Activar/Desactivar</p>
                     <p>Paseadores</p>   

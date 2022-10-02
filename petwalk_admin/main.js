@@ -10,6 +10,7 @@ function createWindow() {
         resizable: false,
         maximizable: false,
         fullscreenable: false,
+        icon: __dirname + '/favicon.ico',
         //frame: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
