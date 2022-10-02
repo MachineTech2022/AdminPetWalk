@@ -1,7 +1,8 @@
 import MenuMajor from "../pages/MenuMajor";
 import Login from "../pages/Login";
 import MenuDashboard from "../pages/MenuDashboard";
-import ListWorkers from "../pages/ListWorkers";
+import ListRequest from "../pages/ListRequest";
+import ListConsumers from "../pages/ListConsumers";
 import Error404 from "../pages/Error404";
 
 const routes = [
@@ -26,8 +27,13 @@ const routes = [
         exact:true
     },
     {
-        path:"/ListWorkers",
-        component:ListWorkers,
+        path:"/ListRequest",
+        component:ListRequest,
+        exact:true
+    },
+    {
+        path:"/ListConsumers",
+        component:ListConsumers,
         exact:true
     },
     {

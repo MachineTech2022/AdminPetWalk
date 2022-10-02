@@ -1,5 +1,5 @@
 import  React,{ useEffect, useState} from "react";
-import './ListWorkers.scss';
+import './ListRequest.scss';
 import axios from 'axios';
 import { Table,Button,Tag} from "antd";
 
@@ -16,7 +16,7 @@ import TitleHeader from "../component/TitleHeader";
 
 
 
-export default function ListWorkers(){
+export default function List(){
 
 
 

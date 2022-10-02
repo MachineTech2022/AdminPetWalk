@@ -5,7 +5,7 @@ import {Card} from 'antd';
 export default function Cards(){
     return(
         <div className="content-target">
-            <a href="/ListWorkers">
+            <a href="/ListRequest">
                 <Card className="target1" >
                     <p>Aceptar/Rechazar</p>
                     <p>Solicitud Paseadores</p>   
@@ -17,7 +17,7 @@ export default function Cards(){
                     <p>Paseadores</p>   
                 </Card>
             </a>
-            <a href="/">
+            <a href="/ListConsumers">
                 <Card className="target3" >
                     <p>Activar/Desactivar</p>
                     <p>Consumidores</p>
