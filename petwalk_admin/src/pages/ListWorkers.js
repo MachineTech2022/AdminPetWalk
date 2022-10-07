@@ -96,7 +96,7 @@ export default function ListConsumers(){
                 key: 'activo',
                 render: (fila, row) => 
                 (fila === false) ? <Button type="primary">Activar</Button>:
-                <Button onClick={()=>(row._id)} danger>Desactivar</Button>
+                <Button onClick={()=>(row._id)} type='danger' >Desactivar</Button>
             },
 
             

@@ -18,11 +18,7 @@ import TitleHeader from "../component/TitleHeader";
 
 
 export default function List(){
-    function delay(n){
-        return new Promise(function(resolve){
-            setTimeout(resolve,n*1000);
-        });
-    }
+    
     
     function ReloadPage(){
         window.location.reload()
@@ -35,7 +31,7 @@ export default function List(){
             message:'Solicitud Aceptada'
         })
         
-        setTimeout(ReloadPage,3000)
+        setTimeout(ReloadPage,1000)
 
         
         
@@ -48,7 +44,7 @@ export default function List(){
             message:'Solicitud Rechazada'
         })
         
-        setTimeout(ReloadPage,3000)
+        setTimeout(ReloadPage,1000)
         
     }
         
@@ -136,7 +132,7 @@ export default function List(){
                 dataIndex: "_id",
                 key: "_id",
                 render: fila => <><Button id="buttonDocument" onClick={()=>AceptarSolicitud(fila)} type='primary' >Aceptar</Button>
-                <Button id="buttonDocument" danger onClick={()=>RechazarSolicitud(fila)}>Rechazar</Button></>
+                <Button id="buttonDocument" type="danger" onClick={()=>RechazarSolicitud(fila)}>Rechazar</Button></>
             },
             
         ]

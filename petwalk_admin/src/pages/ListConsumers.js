@@ -1,21 +1,12 @@
 import  React,{ useEffect, useState} from "react";
 import './ListConsumers.scss';
+import '../.'
 import axios from 'axios';
 import { Table,Button,Input} from "antd";
 import {SearchOutlined} from '@ant-design/icons'
 
-
-
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
-
-
-
-
-
-
-
-
 
 export default function ListConsumers(){
 
@@ -139,16 +130,15 @@ export default function ListConsumers(){
                 key: 'activo',
                 render: (fila, row) => 
                 (fila === false) ? <Button type="primary">Activar</Button>:
-                <Button onClick={()=>BanConsumers(row._id)} danger>Desactivar</Button>
+                <Button type="danger" onClick={()=>BanConsumers(row._id)} >Desactivar</Button>
             },
-
             
         ]
-    
+   
     return(
         <>
             <TitleHeader></TitleHeader>
             <Table dataSource={solicitudes} columns={columns}/>
         </>
     )
-}/**/ 
+}
