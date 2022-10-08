@@ -2,7 +2,7 @@ import  React,{ useEffect, useState} from "react";
 import './ListConsumers.scss';
 import '../.'
 import axios from 'axios';
-import { Table,Button,Input} from "antd";
+import { Table,Button,Input,notification} from "antd";
 import {SearchOutlined} from '@ant-design/icons'
 
 //Componente Title
@@ -10,18 +10,28 @@ import TitleHeader from "../component/TitleHeader";
 
 export default function ListConsumers(){
 
-
-
-    /*function AceptarSolicitud(id){
-        console.log(id)
-        axios.patch('http://localhost:4000/api/trabajador/aceptar/'+id)
+    function ReloadPage(){
         window.location.reload()
-    }*/
+    }
+
+    function ActivateConsumers(id){
+        console.log(id)
+        axios.patch(' http://localhost:4000/api/consumidor/activar/'+id)
+        notification['success']({
+            message:'Cuenta Activada'
+        })
+        
+        setTimeout(ReloadPage,800)
+    }
     
     function BanConsumers(id){
         console.log(id)
         axios.patch('http://localhost:4000/api/consumidor/banear/'+id)
-        window.location.reload()
+        notification['success']({
+            message:'Cuenta Baneada'
+        })
+        
+        setTimeout(ReloadPage,800)
     }
         
     
@@ -129,7 +139,7 @@ export default function ListConsumers(){
                 dataIndex: 'activo',
                 key: 'activo',
                 render: (fila, row) => 
-                (fila === false) ? <Button type="primary">Activar</Button>:
+                (fila === false) ? <Button onClick={()=> ActivateConsumers(row._id) } type="primary">Activar</Button>:
                 <Button type="danger" onClick={()=>BanConsumers(row._id)} >Desactivar</Button>
             },
             

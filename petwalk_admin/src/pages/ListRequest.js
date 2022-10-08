@@ -1,19 +1,13 @@
 import  React,{ useEffect, useState} from "react";
 import './ListRequest.scss';
 import axios from 'axios';
-import { Table,Button,Tag,message,notification} from "antd";
+import { Table,Button,Tag,notification} from "antd";
 
 
 
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
-
-
-
-
-
-
 
 
 
@@ -31,7 +25,7 @@ export default function List(){
             message:'Solicitud Aceptada'
         })
         
-        setTimeout(ReloadPage,1000)
+        setTimeout(ReloadPage,800)
 
         
         
@@ -44,7 +38,7 @@ export default function List(){
             message:'Solicitud Rechazada'
         })
         
-        setTimeout(ReloadPage,1000)
+        setTimeout(ReloadPage,800)
         
     }
         
