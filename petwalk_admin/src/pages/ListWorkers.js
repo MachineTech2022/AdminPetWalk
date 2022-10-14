@@ -2,10 +2,12 @@ import  React,{ useEffect, useState} from "react";
 import './ListWorkers.scss';
 import axios from 'axios';
 import { Table,Button,notification,Input} from "antd";
-import {SearchOutlined} from '@ant-design/icons'
+import {SearchOutlined} from '@ant-design/icons';
+
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
+import Icons from "../component/Icons";
 
 export default function ListConsumers(){
 
@@ -155,7 +157,10 @@ export default function ListConsumers(){
     
     return(
         <>
-            <TitleHeader></TitleHeader>
+            <div className="icons1">
+                <Icons/>
+            </div>
+            <TitleHeader></TitleHeader>            
             <Table dataSource={solicitudes} columns={columns}/>
         </>
     )

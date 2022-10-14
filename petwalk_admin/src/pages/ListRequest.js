@@ -8,7 +8,7 @@ import { Table,Button,Tag,notification} from "antd";
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
-
+import Icons from "../component/Icons";
 
 
 export default function List(){
@@ -133,55 +133,13 @@ export default function List(){
     
     return(
         <>
+            <div className="icons1">
+                <Icons/>
+            </div>
             <TitleHeader></TitleHeader>
             <Table dataSource={solicitudes} columns={columns}/>
              
         </>
     )
 }
-
-
-/*
-()=>AceptarSolicitud(fila)
-render: fila => <><Button onClick= {()=>console.log(columns.id)} type="primary">Aceptar</Button>{" "} <Button type="primary" danger>Rechazar</Button></>
-  <div>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Comuna</th>
-                    <th>Genero</th>
-                    <th>Telefono</th>
-                    <th>Correo</th>
-                    <th>Rut</th>
-                    <th>Direccion</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Antecedentes</th>
-                    <th>Carnet Frontal</th>
-                    <th>Carnet Trasero</th>
-                    <th>Solicitud</th>
-                </tr>
-            </thead>
-            <tbody>
-            {
-                solicitudes.map(solicitud=>(
-            <tr key={solicitud._id}>
-                    <td>{solicitud.nombre}</td>
-                    <td>{solicitud.apellido}</td>
-                    <td>{solicitud.comuna}</td>
-                    <td>{solicitud.genero}</td>
-                    <td>{solicitud.telefono}</td>
-                    <td>{solicitud.correo}</td>
-                    <td>{solicitud.rut}</td>
-                    <td>{solicitud.direccion}</td>
-                    <td>{solicitud.fechaNacimiento}</td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[0]}>Ver</a></td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[1]}>Ver</a></td>
-                    <td><a href={'http://localhost:4000/'+solicitud.documentos[2]}>Ver</a></td>
-                    <td><Button onClick= {()=>console.log(solicitud._id)}>Aceptar</Button><Button>Rechazar</Button></td>
-            </tr>))
-            }
-            </tbody>   
-            </div>  
-*/ 
 
