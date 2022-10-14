@@ -1,26 +1,39 @@
 import  React,{ useEffect, useState} from "react";
 import './ListWorkers.scss';
 import axios from 'axios';
-import { Table,Button} from "antd";
+import { Table,Button,notification,Input} from "antd";
+import {SearchOutlined} from '@ant-design/icons'
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
 
 export default function ListConsumers(){
 
-
-
-    /*function AceptarSolicitud(id){
-        console.log(id)
-        axios.patch('http://localhost:4000/api/trabajador/aceptar/'+id)
+    function ReloadPage(){
         window.location.reload()
-    }*/
+    }
+
+    function ActivateWorker(id){
+        console.log(id)
+        axios.patch('http://localhost:4000/api/trabajador/activar/'+id)
+        notification['success']({
+            message:'Cuenta Activada'
+        })
+        
+        setTimeout(ReloadPage,800)
+        
+    }
     
-    /*function BanWorkers(id){
+    function BanWorkers(id){
         console.log(id)
-        axios.patch('http://localhost:4000/api/consumidor/banear/'+id)
-        window.location.reload()
-    }*/
+        axios.patch('http://localhost:4000/api/trabajador/banear/'+id)
+        notification['success']({
+            message:'Cuenta Baneada'
+        })
+        
+        setTimeout(ReloadPage,800)
+        
+    }
         
     
     //Para consumir la api de Node
@@ -67,7 +80,46 @@ export default function ListConsumers(){
             {
                 title: 'Correo',
                 dataIndex: 'correo',
-                key: 'correo'
+                key: 'correo',
+                filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters})=> {
+                    return <>
+                    <Input
+                    autoFocus 
+                    placeholder="Search email"
+                    value={selectedKeys[0]} 
+                    onChange={(e)=>{
+                        setSelectedKeys(e.target.value ? [e.target.value]: [] );
+                        confirm({closeDropdown:false});
+                    }}
+                    onPressEnter={()=>{
+                        confirm()
+                    }}
+                    onBlur={()=>{
+                        confirm()
+                    }}></Input>
+                    <div id="divButtonSearch">
+                        <Button id="buttonSearch" onClick={()=>
+                            {
+                                confirm();
+                            }}
+                            type="primary">Search
+                        </Button>
+                        <Button id="buttonSearch" onClick={()=>
+                            {
+                                clearFilters();
+                                confirm();
+                            }}
+                            type="danger">Reset
+                        </Button>
+                    </div>
+                    </>
+                },
+                filterIcon:()=>{
+                    return <SearchOutlined/>
+                },
+                onFilter:(value,record)=>{
+                    return record.correo.toLowerCase().includes(value.toLowerCase())
+                }
             },
             {
                 title: 'Rut',
@@ -86,17 +138,16 @@ export default function ListConsumers(){
             },
             {
                 title: 'Estado',
-                dataIndex: 'activo',
-                key: 'activo',
-                render: fila => (fila === false) ? <p>Inactivo</p> : <p>Activo</p>
+                dataIndex: 'estado',
+                key: 'estado',
             },
             {
                 title: 'Activar/Desactivar',
-                dataIndex: 'activo',
-                key: 'activo',
+                dataIndex: 'estado',
+                key: 'estado',
                 render: (fila, row) => 
-                (fila === false) ? <Button type="primary">Activar</Button>:
-                <Button onClick={()=>(row._id)} type='danger' >Desactivar</Button>
+                (fila === 'Activo') ? <Button type="danger" onClick={()=>BanWorkers(row._id)}>Desactivar</Button>:
+                <Button type="primary" onClick={()=>ActivateWorker(row._id)}>Activar</Button>
             },
 
             
@@ -108,4 +159,5 @@ export default function ListConsumers(){
             <Table dataSource={solicitudes} columns={columns}/>
         </>
     )
-}/**/ 
+}/*(fila === false) ? <Button type="primary">Activar</Button>:
+                <Button onClick={()=>(row._id)} type='danger' >Desactivar</Button>*/ 
