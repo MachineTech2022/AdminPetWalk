@@ -1,9 +1,8 @@
 import React from "react";
-import { Route } from "react-router-dom"; 
 import {Row,Layout} from "antd";
 import "./MenuDashboard.scss";
 //Importando componentes
-
+import Icons from "../component/Icons";
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader";
@@ -14,7 +13,10 @@ export default function MenuDashboard(props){
 
     return(
         <Layout>
-            <Row justify="center" className="title">
+            <div className="icons1">
+                <Icons/>
+            </div>
+            <Row className="title">
                 <TitleHeader/>
             </Row>
             <Layout>
