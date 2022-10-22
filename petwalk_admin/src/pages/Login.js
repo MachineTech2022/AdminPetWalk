@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import {} from "react-router-dom"; 
 import './Login.scss'
 import axios from 'axios';
-import {Row,Form,Input,Button,notification} from 'antd';
+import {Row,Form,Input,Button,message} from 'antd';
 //Componente Title
 import TitleHeader from "../component/TitleHeader";
 
@@ -23,6 +23,7 @@ export default function Login(){
             })
             .catch(err =>{
                 //console.log(err);
+                message.error('Correo o contraseña incorrectos')
                 return err.message;
             });
 
@@ -59,18 +60,35 @@ export default function Login(){
                 wrapperCol={{ span: 18 }}
                 initialValues={{ remember: true }}
                 >
-                    <Form.Item label= "Email">
+                    <Form.Item
+                    name='Email' 
+                    label= "Email"
+                    rules={[
+                        {
+                            required:true,
+                            message:'Por favor ingrese su correo'
+                        }
+                    ]}
+                    >
                         <Input
-                            
                             type='email'
                             name="correo"
                             placeholder="Correo electronico"
                             className="login_form_input"
+                            
                         />
                     </Form.Item>
-                    <Form.Item label= "Password">
+                    <Form.Item
+                    name='password' 
+                    label= "Password"
+                    rules={[
+                        {
+                            required:true,
+                            message:'Por favor ingrese contraseña'
+                        }
+                    ]}
+                    >
                         <Input.Password
-                           
                            type='password'
                            name='contrasena'
                            placeholder="Contraseña"
