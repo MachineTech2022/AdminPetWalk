@@ -12,11 +12,10 @@ export default function Login(){
 
 
     function postPlan(data){
-        const url= "http://localhost:4000/api/plan";
-        
+        const url= "http://localhost:4000/api/plan";    
         axios.post(url,data)
         console.log(data)
-
+    
     }
     
     const [inputs,setInputs] = useState({
@@ -36,6 +35,7 @@ export default function Login(){
 
     const formPlan = () =>{
         postPlan(inputs)
+        window.location.reload()
         return false
     }
     
@@ -58,6 +58,7 @@ export default function Login(){
             </Row>
             <div className="content-form-plan">
             <Form
+            id="formularioPlan"
             onChange={changeForm}
             onFinish={formPlan}
             className="form-plan" 
@@ -134,7 +135,7 @@ export default function Login(){
                     </Form.Item>
                         <Row justify="center">
                             <Form.Item wrapperCol={{ offset: 0  , span: 16 }}>
-                                <Button htmlType="submit" className="button" type="primary">Agregar</Button>
+                                <Button htmlType="submit"  className="button" type="primary">Agregar</Button>
                             </Form.Item>
                         </Row>
                     </Form>
