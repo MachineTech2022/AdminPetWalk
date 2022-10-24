@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Row,Form,Input,Button,message} from 'antd';
+import {Row,Form,Input,Button,notification} from 'antd';
 import './AddPlans.scss';
 import axios from 'axios';
 
@@ -9,12 +9,15 @@ import Icons from "../component/Icons";
 import TextArea from "antd/lib/input/TextArea";
 
 export default function Login(){
-
+    function ReloadPage(){
+        window.location.reload()
+    }
 
     function postPlan(data){
         const url= "http://localhost:4000/api/plan";    
         axios.post(url,data)
         console.log(data)
+        
     
     }
     
@@ -35,7 +38,10 @@ export default function Login(){
 
     const formPlan = () =>{
         postPlan(inputs)
-        window.location.reload()
+        //setTimeout(ReloadPage,800)
+        notification['success']({
+            message:'El plan se agrego correctamente'
+        })
         return false
     }
     
