@@ -15,8 +15,11 @@ export default function Login(){
 
     function postPlan(data){
         const url= "http://localhost:4000/api/plan";    
-        axios.post(url,data)
-        console.log(data)
+        axios.post(url,data).then(response=>{
+            console.log(response)
+            return response;
+        })
+        
         
     
     }
@@ -38,7 +41,7 @@ export default function Login(){
 
     const formPlan = () =>{
         postPlan(inputs)
-        //setTimeout(ReloadPage,800)
+        setTimeout(ReloadPage,800)
         notification['success']({
             message:'El plan se agrego correctamente'
         })
