@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Row,Form,Input,Button,notification} from 'antd';
+import {Row,Form,Input,Button,notification,message} from 'antd';
 import './AddPlans.scss';
 import axios from 'axios';
 
@@ -16,9 +16,16 @@ export default function Login(){
     function postPlan(data){
         const url= "http://localhost:4000/api/plan";    
         axios.post(url,data).then(response=>{
-            console.log(response)
-            return response;
-        })
+            if (response.status === 200);
+                console.log(response.status)
+                return response;
+        }).then(result=>{
+            return result.status;
+        }).catch(err =>{
+            //console.log(err);
+            message.error('Correo o contraseña incorrectos')
+            return err.message;
+        });
         
         
     
