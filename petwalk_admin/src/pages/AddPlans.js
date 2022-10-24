@@ -75,7 +75,8 @@ export default function Login(){
                     ]}
                     >
                         <Input
-                            type='costo'
+                            min={7500}
+                            type='number'
                             name="costo"
                             placeholder="Costo"
                             className="costo_form_input"
@@ -127,7 +128,8 @@ export default function Login(){
                     ]}
                     >
                         <Input
-                            type='cantidadCoins'
+                            min={1}
+                            type='number'
                             name="cantidadCoins"
                             placeholder="Cantidad de coins"
                             className="cantidadCoins_form_input"
