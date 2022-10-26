@@ -1,32 +1,23 @@
-import  React,{useState,useEffect}  from "react";
-import './ModifyDeactivatePlans.scss';
+import React, {useState} from "react";
+import {Row,Form,Input,Button,notification,message} from 'antd';
+import './ModalModifyPlans.scss';
 import axios from 'axios';
-import { Table,Button,Input,notification,Modal,Form,Row,message} from "antd";
 
-//Componente Title
-import TitleHeader from "../component/TitleHeader"; 
-import Icons from "../component/Icons";
 import TextArea from "antd/lib/input/TextArea";
 
 
-export default function ModifyDeactivatePlans(){
 
-    //Función para relogear la ruta
+export default function ModalModifyPlans(){
+    
     function ReloadPage(){
         window.location.reload()
-    }
-
-    const [modalInsertar,setModalInsertar]= useState(false);
-
-    const openCloseModalInsertar=()=>{
-        setModalInsertar(!modalInsertar);
     }
 
     function postPlan(data){
         const url= "http://localhost:4000/api/plan";    
         console.log(data)
         axios.post(url,data).then(res=>{
-            openCloseModalInsertar()       
+            
             if (res.status === 200);
                 console.log(res.status)
                 return res;
@@ -39,7 +30,7 @@ export default function ModifyDeactivatePlans(){
         });      
     
     }
-
+    
     const [inputs,setInputs] = useState({
         costo:'',
         encabezado:'',
@@ -63,95 +54,27 @@ export default function ModifyDeactivatePlans(){
         })
         return false
     }
-
+    
+    
+    
+    
     const layout = {
         labelCol: { span: 8 },
-        wrapperCol: { span: 15 },
+        wrapperCol: { span: 8 },
       };
+  
 
-    //Para consumir api de Node 
-    const [listPlans, setListPlans] = useState([])
-    useEffect(()=>{
-            axios.get('http://localhost:4000/api/plan')
-            .then(res => {
-                setListPlans(res.data)
-                
-            })
-            
-            .catch(err=>{
-                console.log(err)
-            })
-        }, [])
-
-    const columns =[
-        {
-            title:'Costo',
-            dataIndex:'costo',
-            key:'costo'
-        },
-        {
-            title:'Encabezado',
-            dataIndex:'encabezado',
-            key:'encabezado'
-        },
-        {
-            title:'Descripción',
-            dataIndex:'descripcion',
-            key:'descripcion'
-        },
-        {
-            title:'Cantidad Coins',
-            dataIndex:'cantidadCoins',
-            key:'cantidadCoins'
-        },
-        {
-            title:'Acciones',
-            dataIndex:'acciones',
-            key:'acciones',
-            render: () => <><Button type="primary" >Modificar</Button>
-            {"   "}<Button type="primary">Activar</Button>
-            {"   "}<Button type="primary">Desactivar</Button>
-            </>
-        }
-    ]
-
-    return (
-
+    return(
         <div>
-            <div className="icons1">
-                <Icons/>
-            </div>
-            <TitleHeader></TitleHeader>
-            <br>
-            </br>
-                <div align='center'>
-                    <Button  type="primary" onClick={openCloseModalInsertar} className="buttonNewPlan">Añadir nuevo plan</Button>
-                </div>
-            <br>
-            </br>
-            <br>
-            </br>
-            <Table dataSource={listPlans} columns={columns}/>
-            <Modal
-            title="Añadir Nuevo Plan"
-            visible={modalInsertar}
-            destroyOnClose={true}
-            onCancel={openCloseModalInsertar}
-            centered
-            footer={[
-                <>
-                    <Button onClick={openCloseModalInsertar}>Cancelar</Button>
-                    <Button type="primary" onClick={formPlan}>Añadir</Button>
-                </>
-            ]}
-            >
-                <Form
-                id="formularioPlan"
-                onChange={changeForm}
-                //onFinish={formPlan}
-                className="form-plan" 
-                {...layout}>
-                    <Form.Item    
+            <div >
+            <Form
+            id="formularioPlan"
+            onChange={changeForm}
+            onFinish={formPlan}
+            className="form-plan" 
+            {...layout}>
+                    <Form.Item
+                    
                     name='costo' 
                     label= "Precio Plan"
                     rules={[
@@ -222,9 +145,14 @@ export default function ModifyDeactivatePlans(){
                             className="cantidadCoins_form_input"
                         />
                     </Form.Item>
-                </Form>         
-            </Modal>
-            
+                        <Row justify="center">
+                            <Form.Item wrapperCol={{ offset: 0  , span: 16 }}>
+                                <Button htmlType="submit"  className="button" type="primary">Modificar</Button>
+                            </Form.Item>
+                        </Row>
+                    </Form>
+            </div>
         </div>
     )
+
 }

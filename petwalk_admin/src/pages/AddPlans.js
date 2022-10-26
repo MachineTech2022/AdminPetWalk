@@ -6,6 +6,7 @@ import axios from 'axios';
 //Componente Title
 import TitleHeader from "../component/TitleHeader";
 import Icons from "../component/Icons";
+import AddPlans from "../pages/AddPlans"
 import TextArea from "antd/lib/input/TextArea";
 
 export default function Login(){
