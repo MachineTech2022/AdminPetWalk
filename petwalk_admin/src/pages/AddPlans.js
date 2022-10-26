@@ -15,15 +15,17 @@ export default function Login(){
 
     function postPlan(data){
         const url= "http://localhost:4000/api/plan";    
-        axios.post(url,data).then(response=>{
-            if (response.status === 200);
-                console.log(response.status)
-                return response;
+        console.log(data)
+        axios.post(url,data).then(res=>{
+            
+            if (res.status === 200);
+                console.log(res.status)
+                return res;
         }).then(result=>{
             return result.status;
         }).catch(err =>{
             //console.log(err);
-            message.error('Correo o contraseña incorrectos')
+            message.error('Datos incorrectos')
             return err.message;
         });
         

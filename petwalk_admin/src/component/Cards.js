@@ -33,6 +33,11 @@ export default function Cards(){
                     <p>Agregar Planes</p>   
                 </Card>
             </a>
+            <a href="/ModifyDeactivatePlans">
+                <Card className="target" >
+                    <p>Modificar/Desactivar Planes</p>   
+                </Card>
+            </a>
         </div>
     )
 }

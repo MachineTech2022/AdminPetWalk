@@ -14,7 +14,7 @@ export default function ListConsumers(){
     function ReloadPage(){
         window.location.reload()
     }
-
+    //Funcion para activar cuentas de consumidor
     function ActivateConsumers(id){
         console.log(id)
         axios.patch(' http://localhost:4000/api/consumidor/activar/'+id)
@@ -24,7 +24,7 @@ export default function ListConsumers(){
         
         setTimeout(ReloadPage,800)
     }
-    
+    //Funcion para boton de banear a consumidor
     function BanConsumers(id){
         console.log(id)
         axios.patch('http://localhost:4000/api/consumidor/banear/'+id)
