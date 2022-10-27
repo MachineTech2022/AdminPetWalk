@@ -4,7 +4,10 @@ import MenuDashboard from "../pages/MenuDashboard";
 import ListRequest from "../pages/ListRequest";
 import ListConsumers from "../pages/ListConsumers";
 import ListWorkers from "../pages/ListWorkers";
+import AddPlans from "../pages/AddPlans";
+import ModifyDeactivatePlans from "../pages/ModifyDeactivatePlans";
 import Error404 from "../pages/Error404";
+
 
 const routes = [
     {
@@ -41,6 +44,16 @@ const routes = [
         path:"/ListWorkers",
         component:ListWorkers,
         exact:true
+    },
+    {
+        path:"/AddPlans",
+        component:AddPlans,
+        exact:true
+    },
+    {
+        path:"/ModifyDeactivatePlans",
+        component:ModifyDeactivatePlans,
+        exact:true,
     },
     {
         component:Error404,
