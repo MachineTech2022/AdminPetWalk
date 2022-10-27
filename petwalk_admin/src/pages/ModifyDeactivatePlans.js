@@ -9,9 +9,11 @@ import Icons from "../component/Icons";
 import TextArea from "antd/lib/input/TextArea";
 
 
+let idPlanGlobal='';
+
 export default function ModifyDeactivatePlans(){
 
-    let idPlanGlobal='';
+    
 
     //Función para relogear la ruta
     function ReloadPage(){
@@ -54,12 +56,12 @@ export default function ModifyDeactivatePlans(){
 
     function putPlan(){
         
-        console.log(idPlanGlobal)
-        /*axios.put('http://localhost:4000/api/plan/'+inputs._id, inputs)
+        console.log(idPlanGlobal);
+        axios.put('http://localhost:4000/api/plan/'+idPlanGlobal, inputs)
         .then(response=>{
             var dataAuxiliar=datos;
             dataAuxiliar.map(elemento => {
-                if(elemento._id===inputs._id){
+                if(elemento._id===idPlanGlobal){
                 elemento.inputs= inputs.caso;
                 elemento.inputs= inputs.encabezado;
                 elemento.inputs= inputs.descripcion;
@@ -68,7 +70,7 @@ export default function ModifyDeactivatePlans(){
             });
             setDatos(dataAuxiliar);
             openCloseModalEditar();
-        })*/
+        })
     }
 
     const [inputs,setInputs] = useState({
@@ -94,9 +96,8 @@ export default function ModifyDeactivatePlans(){
 
         //test.push(id)
         idPlanGlobal= id;
-        console.log(idPlanGlobal)
+        console.log(idPlanGlobal);
         openCloseModalEditar()
-        return idPlanGlobal;
     }
 
     
