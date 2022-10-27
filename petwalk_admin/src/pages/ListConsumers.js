@@ -26,7 +26,6 @@ export default function ListConsumers(){
     }
     //Funcion para boton de banear a consumidor
     function BanConsumers(id){
-        console.log(id)
         axios.patch('http://localhost:4000/api/consumidor/banear/'+id)
         notification['success']({
             message:'Cuenta Baneada'
