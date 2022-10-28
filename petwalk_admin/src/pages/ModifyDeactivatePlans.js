@@ -8,10 +8,10 @@ import TitleHeader from "../component/TitleHeader";
 import Icons from "../component/Icons";
 import TextArea from "antd/lib/input/TextArea";
 
+let idGlobal='';
 
 export default function ModifyDeactivatePlans(){
 
-    let idPlanGlobal='';
 
     //Función para relogear la ruta
     function ReloadPage(){
@@ -34,7 +34,6 @@ export default function ModifyDeactivatePlans(){
 
     //Funcion para añadir un nuevo plan por la api de Node
     function postPlan(data){
-        console.log(inputs._id)
         const url= "http://localhost:4000/api/plan";    
         console.log(data)
         axios.post(url,data).then(res=>{
@@ -54,21 +53,36 @@ export default function ModifyDeactivatePlans(){
 
     function putPlan(){
         
-        console.log(idPlanGlobal)
-        /*axios.put('http://localhost:4000/api/plan/'+inputs._id, inputs)
+        console.log(idGlobal)
+
+        /*var dataAuxiliar=datos;
+            dataAuxiliar.map(elemento => {
+                if(elemento._id === idGlobal){
+                console.log(elemento.costo)
+                elemento.costo= inputs.costo;
+                console.log(elemento.costo)
+                elemento.encabezado= inputs.encabezado;
+                elemento.descripcion= inputs.descripcion;
+                elemento.cantidadCoins= inputs.cantidadCoins;
+                }
+            });*/
+        
+        axios.put('http://localhost:4000/api/plan/'+idGlobal , inputs)
         .then(response=>{
             var dataAuxiliar=datos;
             dataAuxiliar.map(elemento => {
-                if(elemento._id===inputs._id){
-                elemento.inputs= inputs.caso;
-                elemento.inputs= inputs.encabezado;
-                elemento.inputs= inputs.descripcion;
-                elemento.inputs= inputs.cantidadCoins;
+                if(elemento._id === idGlobal){
+                elemento.costo= inputs.costo;
+                elemento.encabezado= inputs.encabezado;
+                elemento.descripcion= inputs.descripcion;
+                elemento.cantidadCoins= inputs.cantidadCoins;
                 }
             });
             setDatos(dataAuxiliar);
             openCloseModalEditar();
-        })*/
+        }).catch(error=>{
+            console.log(error);
+        })
     }
 
     const [inputs,setInputs] = useState({
@@ -92,17 +106,16 @@ export default function ModifyDeactivatePlans(){
     const selectionPlan=(inputs,id)=>{
         setInputs(inputs);
 
-        //test.push(id)
-        idPlanGlobal= id;
-        console.log(idPlanGlobal)
+        idGlobal = id;
+        
+        
         openCloseModalEditar()
-        return idPlanGlobal;
+        return idGlobal;
     }
 
     
 
-    
-
+  
     
 
     const formPlan = () =>{
