@@ -40,7 +40,6 @@ export default function ModifyDeactivatePlans(){
             notification['error']({
                 message:'Favor rellenar todos los campos'
             })
-            return 1
         }
         else if(data.costo < 7500){
             notification['error']({
@@ -74,24 +73,99 @@ export default function ModifyDeactivatePlans(){
     
 
     function putPlan(){
-        
 
-        axios.put('http://localhost:4000/api/plan/'+idGlobal , inputs)
+
+        var dataAuxiliar=datos;
+        dataAuxiliar.map(elemento=> {
+            if(elemento._id === idGlobal){
+                try {
+                    if(inputs.costo < 7500){
+                        notification['error']({
+                            message:'El precio del plan no puede ser menor a 7500'
+                        })
+                    }
+                    else if(inputs.cantidadCoins< 1){
+                        notification['error']({
+                            message:'La cantidad de coins debe ser 1 o superior a 1'
+                        })
+                    }
+                    else if (inputs.costo !== null 
+                        && inputs.encabezado !== undefined
+                        && inputs.descripcion !== undefined
+                        && inputs.cantidadCoins !== undefined){
+                            console.log(typeof(inputs.costo))
+                            console.log(typeof(inputs.encabezado))
+                            elemento.costo= inputs.costo;
+                            elemento.encabezado= inputs.encabezado;
+                            elemento.descripcion= inputs.descripcion;
+                            elemento.cantidadCoins= inputs.cantidadCoins;
+                            
+                            axios.put('http://localhost:4000/api/plan/'+idGlobal , inputs)
+                            openCloseModalEditar();
+                            setTimeout(ReloadPage,800)
+                            notification['success']({
+                                message:'El plan se agrego correctamente'
+                            })
+                    }
+                    else{
+                        notification['error']({
+                            message:'Favor rellenar todos los campos'
+                        })
+                    }
+                    
+                } catch (error) {
+                    notification['error']({
+                        message:'Favor rellenar todos los campos'
+                    })
+                }
+                
+            }
+        })
+        
+        /*axios.put('http://localhost:4000/api/plan/'+idGlobal , inputs)
         .then(response=>{
             var dataAuxiliar=datos;
             dataAuxiliar.map(elemento => {
                 if(elemento._id === idGlobal){
-                elemento.costo= inputs.costo;
-                elemento.encabezado= inputs.encabezado;
-                elemento.descripcion= inputs.descripcion;
-                elemento.cantidadCoins= inputs.cantidadCoins;
+
+                    try {
+                        if(inputs.costo < 7500){
+                            notification['error']({
+                                message:'El precio del plan no puede ser menor a 7500'
+                            })
+                        }
+                        if(inputs.cantidadCoins< 1){
+                            notification['error']({
+                                message:'La cantidad de coins debe ser 1 o superior a 1'
+                            })
+                        }
+                        if (inputs.costo !== null 
+                            && inputs.encabezado !== undefined
+                            && inputs.descripcion !== undefined
+                            && inputs.cantidadCoins !== undefined){
+                                console.log(typeof(inputs.costo))
+                                console.log(typeof(inputs.encabezado))
+                                elemento.costo= inputs.costo;
+                                elemento.encabezado= inputs.encabezado;
+                                elemento.descripcion= inputs.descripcion;
+                                elemento.cantidadCoins= inputs.cantidadCoins;
+                        }
+                        else{
+                            notification['error']({
+                                message:'Favor rellenar todos los campos'
+                            })
+                        }
+                        
+                    } catch (error) {
+                        console.log('no paso')
+                    }
                 }
             });
-            setDatos(dataAuxiliar);
-            openCloseModalEditar();
+            //setDatos(dataAuxiliar);
+            //openCloseModalEditar();
         }).catch(error=>{
             console.log(error);
-        })
+        })*/
 
         
     }
@@ -297,6 +371,7 @@ export default function ModifyDeactivatePlans(){
             title="Modificar Plan"
             visible={modalEditar}
             onCancel={openCloseModalEditar}
+            destroyOnClose={true}
             centered
             footer={[
                 <>
@@ -325,9 +400,8 @@ export default function ModifyDeactivatePlans(){
                             min={7500}
                             type='number'
                             name="costo"
-                            
                             className="costo_form_input"
-                            value={inputs && inputs.costo}
+                            defaultValue={inputs && inputs.costo}
                         />
                     </Form.Item>
                     <Form.Item
