@@ -36,37 +36,46 @@ export default function ModifyDeactivatePlans(){
     function postPlan(data){
         const url= "http://localhost:4000/api/plan";    
         console.log(data)
-        axios.post(url,data).then(res=>{
-            openCloseModalInsertar()       
-            if (res.status === 200);
-                console.log(res.status)
-                return res;
-        }).then(result=>{
-            return result.status;
-        }).catch(err =>{
-            //console.log(err);
-            message.error('Datos incorrectos')
-            return err.message;
-        });      
+        if( data.costo === "" || data.encabezado === "" || data.descripcion === "" || data.cantidadCoins === ""){
+            notification['error']({
+                message:'Favor rellenar todos los campos'
+            })
+            return 1
+        }
+        else if(data.costo < 7500){
+            notification['error']({
+                message:'El precio del plan no puede ser menor a 7500'
+            })
+        }
+        else if(data.cantidadCoins < 1){
+            notification['error']({
+                message:'La cantidad de coins debe ser 1 o superior a 1'
+            })
+        }
+    
+        else{
+            axios.post(url,data).then(res=>{
+                openCloseModalInsertar()       
+                if (res.status === 200);
+                    console.log(res.status)
+                    return res;
+            }).then(result=>{
+                setTimeout(ReloadPage,800)
+                notification['success']({
+                     message:'El plan se agrego correctamente'
+                 })
+                return result.status;
+            }).catch(err =>{
+                message.error('Datos incorrectos')
+                return err.message;
+            });
+        }     
     }
     
 
     function putPlan(){
         
-        console.log(idGlobal)
 
-        /*var dataAuxiliar=datos;
-            dataAuxiliar.map(elemento => {
-                if(elemento._id === idGlobal){
-                console.log(elemento.costo)
-                elemento.costo= inputs.costo;
-                console.log(elemento.costo)
-                elemento.encabezado= inputs.encabezado;
-                elemento.descripcion= inputs.descripcion;
-                elemento.cantidadCoins= inputs.cantidadCoins;
-                }
-            });*/
-        
         axios.put('http://localhost:4000/api/plan/'+idGlobal , inputs)
         .then(response=>{
             var dataAuxiliar=datos;
@@ -83,6 +92,8 @@ export default function ModifyDeactivatePlans(){
         }).catch(error=>{
             console.log(error);
         })
+
+        
     }
 
     const [inputs,setInputs] = useState({
@@ -105,10 +116,7 @@ export default function ModifyDeactivatePlans(){
 
     const selectionPlan=(inputs,id)=>{
         setInputs(inputs);
-
         idGlobal = id;
-        
-        
         openCloseModalEditar()
         return idGlobal;
     }
@@ -120,11 +128,7 @@ export default function ModifyDeactivatePlans(){
 
     const formPlan = () =>{
         postPlan(inputs)
-        setTimeout(ReloadPage,800)
-        notification['success']({
-            message:'El plan se agrego correctamente'
-        })
-        return false
+        return false;
     }
 
     const layout = {
@@ -230,6 +234,7 @@ export default function ModifyDeactivatePlans(){
                             name="costo"
                             placeholder="Costo"
                             className="costo_form_input"
+                            required={true}
                         />
                     </Form.Item>
                     <Form.Item
@@ -320,7 +325,7 @@ export default function ModifyDeactivatePlans(){
                             min={7500}
                             type='number'
                             name="costo"
-                            placeholder="Costo"
+                            
                             className="costo_form_input"
                             value={inputs && inputs.costo}
                         />
@@ -338,9 +343,9 @@ export default function ModifyDeactivatePlans(){
                         <Input
                             type='encabezado'
                             name="encabezado"
-                            placeholder="Nombre del Plan"
+                            
                             className="encabezado_form_input"
-                            value={inputs && inputs.encabezado}
+                            defaultValue={inputs && inputs.encabezado}
                         />
                     </Form.Item>
                     <Form.Item
@@ -357,7 +362,6 @@ export default function ModifyDeactivatePlans(){
                             rows={4}
                             type='descripcion'
                             name="descripcion"
-                            placeholder="Descripción del plan"
                             className="descripcion_form_input"
                             value={inputs && inputs.descripcion}
                         />
@@ -376,7 +380,7 @@ export default function ModifyDeactivatePlans(){
                             min={1}
                             type='number'
                             name="cantidadCoins"
-                            placeholder="Cantidad de coins"
+                            
                             className="cantidadCoins_form_input"
                             value={inputs && inputs.cantidadCoins}
                         />

@@ -92,13 +92,15 @@ export default function Login(){
                             message:'Favor ingresar costo del plan'
                         }
                     ]}
+                    getValueFromEvent
                     >
                         <Input
                             min={7500}
                             type='number'
+                            placeholder="no"
                             name="costo"
-                            placeholder="Costo"
                             className="costo_form_input"
+                            value={4}
                         />
                     </Form.Item>
                     <Form.Item
