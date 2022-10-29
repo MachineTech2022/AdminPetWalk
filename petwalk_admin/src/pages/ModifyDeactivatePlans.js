@@ -11,6 +11,25 @@ import TextArea from "antd/lib/input/TextArea";
 let idGlobal='';
 
 export default function ModifyDeactivatePlans(){
+    //Funcion para activar cuentas de consumidor
+    function ActivatePlan(id){
+        console.log(id)
+        axios.patch(' http://localhost:4000/api/plan/activar/'+id)
+        notification['success']({
+            message:'Cuenta Activada'
+        })
+        
+        setTimeout(ReloadPage,800)
+    }
+    //Funcion para boton de banear a consumidor
+    function DeactivatePlan(id){
+        axios.patch('http://localhost:4000/api/plan/desactivar/'+id)
+        notification['success']({
+            message:'Plan desactivado'
+        })
+        
+        setTimeout(ReloadPage,800)
+    }
 
 
     //Función para relogear la ruta
@@ -122,52 +141,6 @@ export default function ModifyDeactivatePlans(){
             }
         })
         
-        /*axios.put('http://localhost:4000/api/plan/'+idGlobal , inputs)
-        .then(response=>{
-            var dataAuxiliar=datos;
-            dataAuxiliar.map(elemento => {
-                if(elemento._id === idGlobal){
-
-                    try {
-                        if(inputs.costo < 7500){
-                            notification['error']({
-                                message:'El precio del plan no puede ser menor a 7500'
-                            })
-                        }
-                        if(inputs.cantidadCoins< 1){
-                            notification['error']({
-                                message:'La cantidad de coins debe ser 1 o superior a 1'
-                            })
-                        }
-                        if (inputs.costo !== null 
-                            && inputs.encabezado !== undefined
-                            && inputs.descripcion !== undefined
-                            && inputs.cantidadCoins !== undefined){
-                                console.log(typeof(inputs.costo))
-                                console.log(typeof(inputs.encabezado))
-                                elemento.costo= inputs.costo;
-                                elemento.encabezado= inputs.encabezado;
-                                elemento.descripcion= inputs.descripcion;
-                                elemento.cantidadCoins= inputs.cantidadCoins;
-                        }
-                        else{
-                            notification['error']({
-                                message:'Favor rellenar todos los campos'
-                            })
-                        }
-                        
-                    } catch (error) {
-                        console.log('no paso')
-                    }
-                }
-            });
-            //setDatos(dataAuxiliar);
-            //openCloseModalEditar();
-        }).catch(error=>{
-            console.log(error);
-        })*/
-
-        
     }
 
     const [inputs,setInputs] = useState({
@@ -193,12 +166,7 @@ export default function ModifyDeactivatePlans(){
         idGlobal = id;
         openCloseModalEditar()
         return idGlobal;
-    }
-
-    
-
-  
-    
+    } 
 
     const formPlan = () =>{
         postPlan(inputs)
@@ -245,13 +213,19 @@ export default function ModifyDeactivatePlans(){
             key:'cantidadCoins'
         },
         {
-            title:'Acciones',
+            title:'Editar Planes',
             dataIndex:'acciones',
             key:'acciones',
             render: (fila,row) => <><Button type="primary" onClick={()=> selectionPlan(fila,row._id)} >Modificar</Button>
-            {"   "}<Button type="primary">Activar</Button>
-            {"   "}<Button type="primary">Desactivar</Button>
             </>
+        },
+        {
+            title: 'Activar/Desactivar',
+            dataIndex: 'activo',
+            key: 'activo',
+            render: (fila, row) => 
+            (fila === false) ? <Button onClick={()=> ActivatePlan(row._id) } type="primary">Activar</Button>:
+            <Button type="danger" onClick={()=>DeactivatePlan(row._id)} >Desactivar</Button>
         }
     ]
 

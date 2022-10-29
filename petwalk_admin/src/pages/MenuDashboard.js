@@ -3,6 +3,7 @@ import {Row,Layout} from "antd";
 import "./MenuDashboard.scss";
 //Importando componentes
 import Icons from "../component/Icons";
+import CardsDashboars from "../component/CardsDashboards";
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader";
@@ -21,9 +22,7 @@ export default function MenuDashboard(props){
             </Row>
             <Layout>
                 <Content>
-                    <p>Aqui menu target de MenuDashboard</p>
-                    <p>Ventas</p>
-                    <p>Paseos/Sector/Paseador</p>
+                    <CardsDashboars/>
                 </Content>
             </Layout>
         </Layout>

@@ -1,8 +1,8 @@
 import React from "react";
-import './Cards.scss';
+import './CardsDashboards.scss';
 import {Card} from 'antd';
 
-export default function Cards(){
+export default function CardsDashboars(){
     return(
         <div className="content-target">
             <a href="/ListRequest">
@@ -26,13 +26,6 @@ export default function Cards(){
             <a href="/MenuDashboard">
                 <Card className="target" >
                     <p>Dashboard</p>
-                </Card>
-            </a>
-            <a href="/ModifyDeactivatePlans">
-                <Card className="target" >
-                    <p>Planes</p>
-                    <p>Agregar Planes</p>
-                    <p>Modificar Activar/Desactivar</p>   
                 </Card>
             </a>
         </div>
