@@ -35,6 +35,11 @@ export default function Cards(){
                     <p>Modificar Activar/Desactivar</p>   
                 </Card>
             </a>
+            <a href="/DiscountPlans">
+                <Card className="target" >
+                    <p>Descuentos Planes</p> 
+                </Card>
+            </a>
         </div>
     )
 }

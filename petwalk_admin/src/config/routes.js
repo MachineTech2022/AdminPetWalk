@@ -5,6 +5,7 @@ import ListRequest from "../pages/ListRequest";
 import ListConsumers from "../pages/ListConsumers";
 import ListWorkers from "../pages/ListWorkers";
 import ModifyDeactivatePlans from "../pages/ModifyDeactivatePlans";
+import DiscountPlans from "../pages/DiscountPlans";
 import Error404 from "../pages/Error404";
 
 
@@ -47,6 +48,11 @@ const routes = [
     {
         path:"/ModifyDeactivatePlans",
         component:ModifyDeactivatePlans,
+        exact:true,
+    },
+    {
+        path:"/DiscountPlans",
+        component:DiscountPlans,
         exact:true,
     },
     {

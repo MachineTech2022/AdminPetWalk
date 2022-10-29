@@ -3,7 +3,7 @@ import './ModifyDeactivatePlans.scss';
 import axios from 'axios';
 import { Table,Button,Input,notification,Modal,Form,message} from "antd";
 
-//Componente Title
+//Componentes
 import TitleHeader from "../component/TitleHeader"; 
 import Icons from "../component/Icons";
 import TextArea from "antd/lib/input/TextArea";
