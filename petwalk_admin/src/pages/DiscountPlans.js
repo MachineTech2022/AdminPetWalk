@@ -65,12 +65,12 @@ export default function DiscountPlans(){
         var hoy = (`${day}-${month}-${year}`);
 
         console.log(typeof(Date(hoy)))*/
-        console.log(typeof(moment(inputs.fechaTermino).format('DD-MM-YYYY')))
+        console.log(typeof(new Date(moment(inputs.fechaTermino).format('YYYY-MM-DD'))))
         var dataAuxiliar=datos;
         dataAuxiliar.map(elemento=>{
             if(elemento._id === idGlobal){
                 try {
-                    //console.log(moment(inputs.fechaTermino).format('DD-MM-YYYY'))
+                    
                     if(inputs.costoNuevo < 1000){
                         notification['error']({
                             message:'El costo del plan no puede ser menor a 1000'
@@ -78,7 +78,7 @@ export default function DiscountPlans(){
                     }
                     else{
                         elemento.costoNuevo= inputs.costoNuevo
-                        elemento.fechaTermino= inputs.fechaTermino
+                        elemento.fechaTermino= new Date(moment(inputs.fechaTermino).format('YYYY-MM-DD'))
 
                         axios.put('http://localhost:4000/api/plan/crearDescuento/'+idGlobal,inputs)
                         notification['success']({
@@ -94,11 +94,6 @@ export default function DiscountPlans(){
                 }
             }
         })
-
-        /*axios.put('http://localhost:4000/api/plan/crearDescuento/'+idGlobal)
-        notification['success']({
-            message:'Descuento agregado'
-        })*/
     }
 
     const columns =[
