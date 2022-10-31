@@ -6,8 +6,7 @@ import { Table,Button,Input,DatePicker,notification,Modal,Form,message} from "an
 //Componentes
 import TitleHeader from "../component/TitleHeader";
 import Icons from "../component/Icons";
-import { string } from "yup";
-import { date } from "yup/lib/locale";
+import moment from 'moment';
 
 let idGlobal='';
 export default function DiscountPlans(){
@@ -59,16 +58,34 @@ export default function DiscountPlans(){
     } 
 
     function putDiscount(id){
+        /*var today = new Date();
+        var day = today.getDate();
+        var month = today.getMonth() + 1;
+        var year = today.getFullYear();
+        var hoy = (`${day}-${month}-${year}`);
+
+        console.log(typeof(Date(hoy)))*/
+        console.log(typeof(moment(inputs.fechaTermino).format('DD-MM-YYYY')))
         var dataAuxiliar=datos;
         dataAuxiliar.map(elemento=>{
             if(elemento._id === idGlobal){
                 try {
-                    console.log(inputs.fechaTermino)
+                    //console.log(moment(inputs.fechaTermino).format('DD-MM-YYYY'))
                     if(inputs.costoNuevo < 1000){
                         notification['error']({
                             message:'El costo del plan no puede ser menor a 1000'
                         })
                     }
+                    else{
+                        elemento.costoNuevo= inputs.costoNuevo
+                        elemento.fechaTermino= inputs.fechaTermino
+
+                        axios.put('http://localhost:4000/api/plan/crearDescuento/'+idGlobal,inputs)
+                        notification['success']({
+                            message:'Descuento agregado'
+                        })
+                    }
+                    
                     
                 } catch (error) {
                     notification['error']({
@@ -171,7 +188,10 @@ export default function DiscountPlans(){
                         }
                     ]}
                     >
-                        <DatePicker/>
+                        <DatePicker
+                        >
+
+                        </DatePicker>
                     </Form.Item>
                 </Form>
             </Modal>
