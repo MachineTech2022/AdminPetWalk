@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {} from "react-router-dom"; 
 import './DiscountPlans.scss'
 import axios from 'axios';
-import { Table,Button,Input,DatePicker,notification,Modal,Form,message} from "antd";
+import { Table,Button,Input,notification,Modal,Form} from "antd";
 //Componentes
 import TitleHeader from "../component/TitleHeader";
 import Icons from "../component/Icons";
@@ -19,6 +19,10 @@ export default function DiscountPlans(){
         setModalDiscount(!modalDiscount);
     }
 
+    //Función para relogear la ruta
+    function ReloadPage(){
+        window.location.reload()
+    }
 
     //Para consumir api de Node y listar
     useEffect(()=>{
@@ -100,6 +104,8 @@ export default function DiscountPlans(){
                         
 
                         axios.put('http://localhost:4000/api/plan/crearDescuento/'+idGlobal,inputs)
+                        openCloseModalDiscount();
+                        setTimeout(ReloadPage,800)
                         notification['success']({
                             message:'Descuento agregado'
                         })
@@ -113,6 +119,26 @@ export default function DiscountPlans(){
                 }
             }
         })
+    }
+
+    //Funcion para activar cuentas de consumidor
+    function ActivateDiscount(id){
+        console.log(id)
+        axios.patch(' http://localhost:4000/api/plan/descuento/activar/'+id)
+        notification['success']({
+            message:'Descuento Activada'
+        })
+        
+        setTimeout(ReloadPage,800)
+    }
+    //Funcion para boton de banear a consumidor
+    function DeactivateDiscount(id){
+        axios.patch('http://localhost:4000/api/plan/descuento/desactivar/'+id)
+        notification['success']({
+            message:'Descuento desactivado'
+        })
+        
+        setTimeout(ReloadPage,800)
     }
 
     const columns =[
@@ -148,6 +174,14 @@ export default function DiscountPlans(){
             render: (fila,row) => <><Button type="primary" onClick={()=> selectionDiscount(fila,row._id)} >Agregar Descuento</Button>
             </>
         },
+        {
+            title:'Activar/Desactivar',
+            dataIndex:'descuentoActivo',
+            key:'descuentoActivo',
+            render:(fila, row) => 
+            (fila === false) ? <Button onClick={()=> ActivateDiscount(row._id) } type="primary">Activar</Button>:
+            <Button type="danger" onClick={()=>DeactivateDiscount(row._id)} >Desactivar</Button>
+        }
         
     ]
 
