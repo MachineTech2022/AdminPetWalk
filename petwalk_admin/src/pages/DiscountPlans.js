@@ -63,22 +63,33 @@ export default function DiscountPlans(){
         var month = today.getMonth() + 1;
         var year = today.getFullYear();
         var hoy = (`${day}-${month}-${year}`);
-
         console.log(typeof(Date(hoy)))*/
-        console.log(typeof(new Date(moment(inputs.fechaTermino).format('YYYY-MM-DD'))))
+        
         var dataAuxiliar=datos;
+        
         dataAuxiliar.map(elemento=>{
             if(elemento._id === idGlobal){
                 try {
+                    console.log(typeof(inputs.fechaTermino)+'1')
+                    console.log(typeof(inputs.costoNuevo)+'2')
                     
                     if(inputs.costoNuevo < 1000){
                         notification['error']({
                             message:'El costo del plan no puede ser menor a 1000'
                         })
                     }
+                    else if(inputs.costoNuevo === undefined || inputs.fechaTermino === undefined){
+                        notification['error']({
+                            message:'Favor rellenar todos los campos'
+                        })
+                        console.log('por aqui pasa')
+                    }
                     else{
+                        console.log(elemento.costoNuevo)
                         elemento.costoNuevo= inputs.costoNuevo
-                        elemento.fechaTermino= new Date(moment(inputs.fechaTermino).format('YYYY-MM-DD'))
+                        elemento.fechaTermino=moment(inputs.fechaTermino).format('YYYY/MM/DD')
+                        console.log(elemento.fechaTermino)
+                        
 
                         axios.put('http://localhost:4000/api/plan/crearDescuento/'+idGlobal,inputs)
                         notification['success']({
@@ -183,10 +194,11 @@ export default function DiscountPlans(){
                         }
                     ]}
                     >
-                        <DatePicker
+                        <Input
+                        type='date'
+                        name="fechaTermino"
                         >
-
-                        </DatePicker>
+                        </Input>
                     </Form.Item>
                 </Form>
             </Modal>
