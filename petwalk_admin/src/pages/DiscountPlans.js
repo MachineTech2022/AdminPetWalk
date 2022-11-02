@@ -58,20 +58,23 @@ export default function DiscountPlans(){
     } 
 
     function putDiscount(id){
-        /*var today = new Date();
-        var day = today.getDate();
+        var today = new Date();
+        var day = today.getDate() ;
         var month = today.getMonth() + 1;
         var year = today.getFullYear();
-        var hoy = (`${day}-${month}-${year}`);
-        console.log(typeof(Date(hoy)))*/
+        var hoy = (`${year}-${month}-${day}`);
+        console.log(typeof(Date(hoy)))
         
         var dataAuxiliar=datos;
         
         dataAuxiliar.map(elemento=>{
             if(elemento._id === idGlobal){
                 try {
-                    console.log(typeof(inputs.fechaTermino)+'1')
-                    console.log(typeof(inputs.costoNuevo)+'2')
+                    console.log((inputs.fechaTermino)+'1')
+                    console.log((hoy)+'2')
+
+
+                    
                     
                     if(inputs.costoNuevo < 1000){
                         notification['error']({
@@ -83,6 +86,11 @@ export default function DiscountPlans(){
                             message:'Favor rellenar todos los campos'
                         })
                         console.log('por aqui pasa')
+                    }
+                    else if(new moment(inputs.fechaTermino) < new moment(hoy)){
+                        notification['error']({
+                            message:'Favor ingresar una fecha valida'
+                        })
                     }
                     else{
                         console.log(elemento.costoNuevo)
