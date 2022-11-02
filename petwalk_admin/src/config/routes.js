@@ -6,7 +6,9 @@ import ListConsumers from "../pages/ListConsumers";
 import ListWorkers from "../pages/ListWorkers";
 import ModifyDeactivatePlans from "../pages/ModifyDeactivatePlans";
 import DiscountPlans from "../pages/DiscountPlans";
+import DashboardGeneral from "../pages/DashboardGeneral";
 import Error404 from "../pages/Error404";
+
 
 
 const routes = [
@@ -53,6 +55,11 @@ const routes = [
     {
         path:"/DiscountPlans",
         component:DiscountPlans,
+        exact:true,
+    },
+    {
+        path:"/DashboardGeneral",
+        component:DashboardGeneral,
         exact:true,
     },
     {
