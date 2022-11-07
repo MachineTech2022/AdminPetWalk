@@ -5,11 +5,41 @@ import axios from 'axios';
 
 const WidgetGeneral=({type})=>{
 
-    const [cuenta, getCuenta] = useState([])
+    // Consumidores
+    const [consumidores, getConsumidores] = useState([])
     useEffect(()=>{
             axios.get('http://localhost:4000/api/consumidor')
             .then(res => {
-                getCuenta(res.data)
+                getConsumidores(res.data)
+                
+            })
+            
+            .catch(err=>{
+                console.log(err)
+            })
+        }, [])
+
+    // Solicitudes de trabajadores    
+    const [solicitudes, setSolicitud] = useState([])
+    useEffect(()=>{
+            axios.get('http://localhost:4000/api/trabajador')
+            .then(res => {
+                setSolicitud(res.data)
+                
+            })
+            
+            .catch(err=>{
+                console.log(err)
+            })
+        }, [])
+
+
+
+    const [worker, setWorkers] = useState([])
+    useEffect(()=>{
+            axios.get('http://localhost:4000/api/trabajador/all')
+            .then(res => {
+                setWorkers(res.data)
                 
             })
             
@@ -30,7 +60,7 @@ const WidgetGeneral=({type})=>{
                     titulo: "Usuarios Paseadores",
                     isMoney:false,
                     link:"Cantidad total usuarios",
-                    
+                    cantidad: worker.length,
                     icon: <UserOutlined className="iconUser" style={{color:"crimson"}}/>,
                 };
                 break;
@@ -39,7 +69,7 @@ const WidgetGeneral=({type})=>{
                         titulo: "Usuarios Consumidores",
                         isMoney:false,
                         link:"Cantidad total de usuarios",
-                        cuenta: cuenta.length,
+                        cantidad: consumidores.length,
                         icon: <UserOutlined className="iconUser" style={{color:"blue"}}/>,
                     };
                     break;
@@ -51,11 +81,12 @@ const WidgetGeneral=({type})=>{
                     icon: <ShoppingCartOutlined className="iconSalesPlans" style={{color:"yellow"}}/>,
                 };
                     break;
-                case "other":
+                case "request":
                 data={
-                    titulo: "Others",
+                    titulo: "Solicitudes Pendientes",
                     isMoney:false,
-                    link:"See all user workers",
+                    cantidad:solicitudes.length,
+                    link:"Cantidad de solicitudes pendientes",
                     icon: <UserOutlined className="iconUser" style={{color:"green"}}/>,
                 };
                 break;
@@ -70,7 +101,7 @@ const WidgetGeneral=({type})=>{
         <div className="widgetGeneral">
             <div className="left">
                 <span className="titleSpan  ">{data.titulo}</span>
-                <span className="counter">{data.isMoney && "$"} {data.cuenta}
+                <span className="counter">{data.isMoney && "$"} {data.cantidad}
                 </span>
                 <span className="link">{data.link}</span>
             </div>

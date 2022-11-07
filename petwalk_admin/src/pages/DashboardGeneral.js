@@ -29,8 +29,8 @@ export default function DashboardGeneral(props){
             <div className="containerWidget">
                 <WidgetGeneral type="usersWorker"/>
                 <WidgetGeneral type="userConsumers"/>
+                <WidgetGeneral type="request"/>
                 <WidgetGeneral type="salesPlans"/>
-                <WidgetGeneral type="other"/>
             </div>
             <div className="charts">
                 <Featured/>
