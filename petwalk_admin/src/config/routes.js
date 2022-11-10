@@ -7,7 +7,9 @@ import ListWorkers from "../pages/ListWorkers";
 import ModifyDeactivatePlans from "../pages/ModifyDeactivatePlans";
 import DiscountPlans from "../pages/DiscountPlans";
 import DashboardGeneral from "../pages/DashboardGeneral";
+import ReportUser from "../pages/ReportUser";
 import Error404 from "../pages/Error404";
+
 
 
 
@@ -60,6 +62,11 @@ const routes = [
     {
         path:"/DashboardGeneral",
         component:DashboardGeneral,
+        exact:true,
+    },
+    {
+        path:"/ReportUser",
+        component:ReportUser,
         exact:true,
     },
     {

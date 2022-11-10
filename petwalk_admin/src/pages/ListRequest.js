@@ -19,7 +19,6 @@ export default function List(){
     }
 
     function AceptarSolicitud(id){
-        console.log(id)
         axios.patch('http://localhost:4000/api/trabajador/aceptar/'+id)
         notification['success']({
             message:'Solicitud Aceptada'
@@ -32,7 +31,6 @@ export default function List(){
     }
     
     function RechazarSolicitud(id){
-        console.log(id)
         axios.patch('http://localhost:4000/api/trabajador/rechazar/'+id)
         notification['success']({
             message:'Solicitud Rechazada'

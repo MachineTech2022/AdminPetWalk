@@ -40,6 +40,11 @@ export default function Cards(){
                     <p>Descuentos Planes</p> 
                 </Card>
             </a>
+            <a href="/ReportUser">
+                <Card className="target" >
+                    <p>Reportes de usuarios</p> 
+                </Card>
+            </a>
         </div>
     )
 }
