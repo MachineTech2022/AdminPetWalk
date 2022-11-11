@@ -22,19 +22,84 @@ export default function ReportUser(){
             })
         }, [])
 
+
+    const [consumers, setConsumers] = useState([])
+    useEffect(()=>{
+            axios.get('http://localhost:4000/api/consumidor')
+            .then(res => {
+                setConsumers(res.data)
+                
+            })
+            
+            .catch(err=>{
+                console.log(err)
+            })
+        }, [])
+
+
+    const [worker, setWorker] = useState([])
+    useEffect(()=>{
+            axios.get('http://localhost:4000/api/trabajador/all')
+            .then(res => {
+                setWorker(res.data)
+                
+            })
+            
+            .catch(err=>{
+                console.log(err)
+            })
+        }, [])
+    
+
+    function MapCosumer(id){
+        for(var i=0; i < consumers.length; i++){
+            if(id === consumers[i]._id){
+                return (consumers[i].nombre)
+            }
+            
+        }
+    }
+
+    function MapWorker(id){
+        for(var i=0; i < worker.length; i++){
+            if(id === worker[i]._id){
+                return (worker[i].nombre)
+            }
+            
+        }
+    }
+    
+
+    
+
     const columns= [
         {
-            title: 'ID CONSUMIDOR',
-            dataIndex: 'idConsumidor',
-            key: 'idConsumidor'
+            title: 'Nombre Cliente',
+            dataIndex: 'descripcion',
+            key: 'descripcion',
+            render: (fila,row)=>  <p>{MapCosumer(row.idConsumidor)}</p>
+            //<Button  onClick={()=> Test(row.idConsumidor)} >Test</Button>
         },
+        {
+            title: 'Nombre Paseador',
+            dataIndex: 'descripcion',
+            key: 'descripcion',
+            render: (fila,row)=>  <p>{MapWorker(row.idTrabajador)}</p>
+            //<Button  onClick={()=> Test(row.idConsumidor)} >Test</Button>
+        },
+        {
+            title: 'Descripción',
+            dataIndex: 'descripcion',
+            key: 'descripcion'
+        },
+        
     ]
     
 
     return (
         <div>
             <TitleHeader/>
-            <Table dataSource={reportes} columns={columns}/>
+            <Table dataSource={reportes} data={consumers} columns={columns}/>
         </div>
     )
 }
