@@ -6,7 +6,7 @@ import { Table,Button,notification} from "antd";
 //Componentes
 import TitleHeader from "../component/TitleHeader";
 
-
+let num = [];
 export default function ReportUser(){
 
     const [reportes, setReporte] = useState([])
@@ -94,12 +94,47 @@ export default function ReportUser(){
         },
         
     ]
+
+
+    //revision
+
+    const [boletas, setBoletas] = useState([])
+    useEffect(()=>{
+            axios.get('http://localhost:4000/api/boleta')
+            .then(res => {
+                setBoletas(res.data)
+                
+            })
+            
+            .catch(err=>{
+                console.log(err)
+            })
+        }, [])
+
+
+        function SumBoletas(){
+            for(var i=0; i < boletas.length; i++){
+                
+                num.push(boletas[i].totalPagado)
+
+                console.log(num)
+                //console.log(boletas[i].totalPagado)             
+            }
+            let total = num.reduce((a, b) => a + b, 0);
+
+            console.log(total)
+            //Vaciar array
+            num.length = num.length - num.length
+
+            return total
+        }
     
 
     return (
         <div>
             <TitleHeader/>
             <Table dataSource={reportes} data={consumers} columns={columns}/>
+            <Button onClick={()=> SumBoletas()}>test</Button>
         </div>
     )
 }
