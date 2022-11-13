@@ -130,7 +130,7 @@ function Test(){
         <div>
             <TitleHeader/>
             <Table dataSource={reportes} data={consumers} columns={columns}/>
-            <Button onClick={()=> Test()}>Test</Button>
+            
         </div>
     )
 }
