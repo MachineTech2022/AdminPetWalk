@@ -6,7 +6,7 @@ import { Table,Button,notification} from "antd";
 //Componentes
 import TitleHeader from "../component/TitleHeader";
 
-let num = [];
+let fecha = []
 export default function ReportUser(){
 
     const [reportes, setReporte] = useState([])
@@ -95,46 +95,42 @@ export default function ReportUser(){
         
     ]
 
+    //Boletas filtradas ultimos 7 días 
+  const [boletas, setBoletas] = useState([])
+  useEffect(()=>{
+          axios.get('http://localhost:4000/api/boleta/filtro')
+          .then(res => {
+              setBoletas(res.data)
+              
+          })
+          
+          .catch(err=>{
+              console.log(err)
+          })
+      }, [])
 
-    //revision
 
-    const [boletas, setBoletas] = useState([])
-    useEffect(()=>{
-            axios.get('http://localhost:4000/api/boleta')
-            .then(res => {
-                setBoletas(res.data)
-                
-            })
+
+function Test(){
+    for(var i=0; i < boletas.length; i++){
             
-            .catch(err=>{
-                console.log(err)
-            })
-        }, [])
+        //fecha.push((boletas[i].fechaCompra).slice(0,10))
+        fecha.push({'fecha': (boletas[i].fechaCompra).slice(0,10) , 'total':(boletas[i].totalPagado)})
+        console.log((fecha))
+        
+        //console.log(boletas[i].totalPagado)             
+    }
+    console.log(typeof(boletas))
+}
 
-
-        function SumBoletas(){
-            for(var i=0; i < boletas.length; i++){
-                
-                num.push(boletas[i].totalPagado)
-
-                console.log(num)
-                //console.log(boletas[i].totalPagado)             
-            }
-            let total = num.reduce((a, b) => a + b, 0);
-
-            console.log(total)
-            //Vaciar array
-            num.length = num.length - num.length
-
-            return total
-        }
+        
     
 
     return (
         <div>
             <TitleHeader/>
             <Table dataSource={reportes} data={consumers} columns={columns}/>
-            <Button onClick={()=> SumBoletas()}>test</Button>
+            <Button onClick={()=> Test()}>Test</Button>
         </div>
     )
 }

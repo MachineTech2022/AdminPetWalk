@@ -3,16 +3,15 @@ import "./Chart.scss";
 import axios from 'axios';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Button } from "antd";
 
-let num = [];
+
 export default function Chart(){
   
   
-  
+ //Boletas filtradas ultimos 7 días 
   const [boletas, setBoletas] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/boleta')
+            axios.get('http://localhost:4000/api/boleta/filtro')
             .then(res => {
                 setBoletas(res.data)
                 
@@ -23,12 +22,20 @@ export default function Chart(){
             })
         }, [])
   
+  console.log(boletas)
+  
+  function Test(){
+    for(var i=0; i < boletas.length; i++){
+            
+        console.log((boletas[i].fechaCompra).slice(0,10))
 
+    
+        //console.log(boletas[i].totalPagado)             
+    }
+}
   
 
-  
-
-  const data = [
+  /*const data = [
     {
       name: 'Fecha 1',
       uv: 5000,
@@ -71,24 +78,9 @@ export default function Chart(){
       pv: 4300,
       amt: 2100,
     },
-  ]; 
+  ]; */
 
-  function SumBoletas(){
-    for(var i=0; i < boletas.length; i++){
-        
-        num.push(boletas[i].totalPagado)
-
-        console.log(num)
-        //console.log(boletas[i].totalPagado)             
-    }
-    let total = num.reduce((a, b) => a + b, 0);
-
-    console.log(total)
-    //Vaciar array
-    num.length = num.length - num.length
-
-    return total
-}
+  
   
   
   return (

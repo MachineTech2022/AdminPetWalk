@@ -3,7 +3,10 @@ import "./WidgetGeneral.scss";
 import {UpOutlined,UserOutlined,ShoppingCartOutlined} from '@ant-design/icons';
 import axios from 'axios';
 
+
+let num = [];
 const WidgetGeneral=({type})=>{
+
 
     // Consumidores
     const [consumidores, getConsumidores] = useState([])
@@ -32,6 +35,47 @@ const WidgetGeneral=({type})=>{
                 console.log(err)
             })
         }, [])
+    
+    
+    // Boletas 
+    const [boletas, setBoletas] = useState([])
+    useEffect(()=>{
+            axios.get('http://localhost:4000/api/boleta')
+            .then(res => {
+                setBoletas(res.data)
+                
+            })
+            
+            .catch(err=>{
+                console.log(err)
+            })
+        }, [])
+
+
+    function SumBoletas(){
+        for(var i=0; i < boletas.length; i++){
+            
+            num.push(boletas[i].totalPagado)
+    
+            console.log(num)
+            //console.log(boletas[i].totalPagado)             
+        }
+        let total = num.reduce((a, b) => a + b, 0);
+        
+        //Formatear el total a CLP
+        const formatterPeso = new Intl.NumberFormat('es-CL', {
+            style: 'currency',
+            currency: 'CLP',
+            minimumFractionDigits: 0
+          })
+        
+        total =(formatterPeso.format(total))
+        
+        //Vaciar array
+        num.length = num.length - num.length
+    
+        return total
+    }
 
 
 
@@ -58,7 +102,6 @@ const WidgetGeneral=({type})=>{
             case "usersWorker":
                 data={
                     titulo: "Usuarios Paseadores",
-                    isMoney:false,
                     link:"Cantidad total usuarios",
                     cantidad: worker.length,
                     icon: <UserOutlined className="iconUser" style={{color:"crimson"}}/>,
@@ -78,6 +121,7 @@ const WidgetGeneral=({type})=>{
                     titulo: "Ventas de Planes",
                     isMoney:true,
                     link:"Total de ventas",
+                    cantidad: SumBoletas(),
                     icon: <ShoppingCartOutlined className="iconSalesPlans" style={{color:"yellow"}}/>,
                 };
                     break;
@@ -101,7 +145,7 @@ const WidgetGeneral=({type})=>{
         <div className="widgetGeneral">
             <div className="left">
                 <span className="titleSpan  ">{data.titulo}</span>
-                <span className="counter">{data.isMoney && "$"} {data.cantidad}
+                <span className="counter"> {data.cantidad}
                 </span>
                 <span className="link">{data.link}</span>
             </div>
