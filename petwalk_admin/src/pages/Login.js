@@ -3,8 +3,9 @@ import {} from "react-router-dom";
 import './Login.scss'
 import axios from 'axios';
 import {Row,Form,Input,Button,message} from 'antd';
+import LogoPet from '../assets/img/LogoPet.png'
+
 //Componente Title
-import TitleHeader from "../component/TitleHeader";
 
 export default function Login(){
 
@@ -48,12 +49,20 @@ export default function Login(){
     }
     
     return(
-        <div>
-            <Row justify="center" className="title">
-                <TitleHeader/>
+        <div className="fondo">
+            
+            <Row justify="center bg-transparent" className="title">
+                <div className="bg-transparent ">  
+                    <img 
+                        className="logo" 
+                        src={LogoPet}
+                        alt="LogoPet"
+                        />
+                </div>
             </Row>
-            <Row className="content" justify="center" align="middle">
+            <Row className="content no-color" justify="center" align="middle">
                 <Form
+                className="d-flex flex-column from-personalizado text-light"
                 onChange={changeForm}
                 onFinish={login}
                 labelCol={{ span: 6 }}
@@ -62,7 +71,7 @@ export default function Login(){
                 >
                     <Form.Item
                     name='Email' 
-                    label= "Email"
+                    label= "Email" 
                     rules={[
                         {
                             required:true,
@@ -97,7 +106,7 @@ export default function Login(){
                     </Form.Item>
                     <Row justify="center">
                         <Form.Item wrapperCol={{ offset: 6  , span: 16 }}>
-                                <Button htmlType="submit" className="button" type="primary">Iniciar Sesión</Button>
+                            <Button htmlType="submit" className="button" type="primary">Iniciar Sesión</Button>
                         </Form.Item>
                     </Row>
                 </Form>

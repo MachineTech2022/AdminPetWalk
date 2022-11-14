@@ -1,43 +1,19 @@
 import React from "react";
-import { Route } from "react-router-dom"; 
-import {Row,Layout} from "antd";
+import {Row} from "antd";
 import "./MenuMajor.scss";
+// import BasicExample from "../component/navraro";
 //Importando componentes
-import Cards from "../component/Cards";
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader";
 
 export default function MenuMajor(props){
-    //console.log(props);
-    const {routes}= props;
-    const {Content} = Layout;
 
     return(
-        <Layout>
-            <Row justify="center" className="title">
-                <TitleHeader/>
+        <div className=" progress-bar">
+            <TitleHeader/>
+            <Row className="d-flex content no-color" justify="center" align="middle">
             </Row>
-            <Layout className="content">
-                <Content>
-                    <Cards/>
-                </Content>
-                <Content>
-                    <LoadRouters routes={routes}/>
-                </Content>
-            </Layout>
-        </Layout>
-    )
-}
-
-function LoadRouters({routes}) {
-    return routes.map((route,index)=>
-        <Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            component={route.component}
-
-        />
+        </div>
     )
 }
