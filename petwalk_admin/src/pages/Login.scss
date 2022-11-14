@@ -11,7 +11,38 @@ div{
         height: 554px;
         background-color: #CDA2EA; 
     }
-    
-    
 }
+.fondo{
+    background-image: url(../../public/pasear-perro.jpg) !important;
+    background-size: 100%;
+    background-repeat: no-repeat;
 
+}
+.no-color{
+    background-color: transparent !important;
+}
+.from-personalizado{
+    background-color: #00000069;
+    width: 35%;
+    height: 40%;
+    align-items: center;
+    justify-content: center;
+    div{
+        width: 90%;
+        height: 10%;
+        justify-content: center;
+        div{
+            margin: 0px !important;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    label{
+        color: white !important;
+    }
+    input{
+        margin: auto;
+    }
+}

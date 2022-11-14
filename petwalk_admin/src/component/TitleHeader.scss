@@ -1,11 +1,42 @@
 @import "../scss/index.scss";
 
 .title{
-    width: 200px;
+    width: 100%;
     background-color: #CDA2EA;
+    align-items: flex-start;
+    font-weight: 700;
+    // justify-content: space-evenly !important;
 }
-
+.bg-letras{
+    width: 100%;
+    a{
+        color: #4630AB !important;
+    }
+}
 .logo{
     justify-content: end;
     width: 200px;
+    padding-left: 5px;
+
+}
+.mg-0{
+    margin: 0px !important;
+    width: 100% !important;
+
+}
+.volver{
+    width: 2em !important;
+    height: 2em !important;
+    padding: 0px !important;
+    svg{
+        width: 2em;
+        height: 2em;
+    }
+}
+.nav-botones{
+    margin-left: 5px;
+    
+}
+.pd{
+    margin-top: 1px;
 }

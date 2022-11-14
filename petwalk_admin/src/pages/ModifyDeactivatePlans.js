@@ -1,7 +1,8 @@
 import  React,{useState,useEffect}  from "react";
 import './ModifyDeactivatePlans.scss';
 import axios from 'axios';
-import { Table,Button,Input,notification,Modal,Form,message} from "antd";
+import { Table,Input,notification,Modal,Form,message} from "antd";
+import Button from 'react-bootstrap/Button';
 
 //Componentes
 import TitleHeader from "../component/TitleHeader"; 
@@ -224,8 +225,8 @@ export default function ModifyDeactivatePlans(){
             dataIndex: 'activo',
             key: 'activo',
             render: (fila, row) => 
-            (fila === false) ? <Button onClick={()=> ActivatePlan(row._id) } type="primary">Activar</Button>:
-            <Button type="danger" onClick={()=>DeactivatePlan(row._id)} >Desactivar</Button>
+            (fila === false) ? <Button onClick={()=> ActivatePlan(row._id) } variant="success">Activar</Button>:
+            <Button  variant="danger" onClick={()=>DeactivatePlan(row._id)} >Desactivar</Button>
         }
     ]
 
@@ -240,7 +241,7 @@ export default function ModifyDeactivatePlans(){
             <br>
             </br>
                 <div align='center'>
-                    <Button  type="primary" onClick={openCloseModalInsertar} className="buttonNewPlan">Añadir nuevo plan</Button>
+                    <Button variant="success" onClick={openCloseModalInsertar}>Añadir nuevo plan</Button>{' '}
                 </div>
             <br>
             </br>
@@ -255,8 +256,8 @@ export default function ModifyDeactivatePlans(){
             centered
             footer={[
                 <>
-                    <Button onClick={openCloseModalInsertar}>Cancelar</Button>
-                    <Button type="primary" onClick={formPlan}>Añadir</Button>
+                    <Button variant="danger" onClick={openCloseModalInsertar}>Cancelar</Button>
+                    <Button variant="success" onClick={formPlan}>Añadir</Button>
                 </>
             ]}
             >

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import routes from './config/routes';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

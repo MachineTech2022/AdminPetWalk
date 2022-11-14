@@ -1,8 +1,8 @@
 import  React,{ useEffect, useState} from "react";
 import './ListRequest.scss';
 import axios from 'axios';
-import { Table,Button,Tag,notification} from "antd";
-
+import { Table,Tag,notification} from "antd";
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -125,8 +125,8 @@ export default function List(){
                 title: 'Solicitud',
                 dataIndex: "_id",
                 key: "_id",
-                render: fila => <><Button id="buttonDocument" onClick={()=>AceptarSolicitud(fila)} type='primary' >Aceptar</Button>
-                <Button id="buttonDocument" type="danger" onClick={()=>RechazarSolicitud(fila)}>Rechazar</Button></>
+                render: fila => <><Button  id="buttonDocument" onClick={()=>AceptarSolicitud(fila)} variant="success" >Aceptar</Button>
+                <Button  className="btn-danger" id="buttonDocument" variant="danger" onClick={()=>RechazarSolicitud(fila)}>Rechazar</Button></>
             },
             
         ]

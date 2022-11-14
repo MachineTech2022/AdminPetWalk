@@ -1,9 +1,9 @@
 import  React,{ useEffect, useState} from "react";
 import './ListWorkers.scss';
 import axios from 'axios';
-import { Table,Button,notification,Input} from "antd";
+import { Table,notification,Input} from "antd";
 import {SearchOutlined} from '@ant-design/icons';
-
+import Button from 'react-bootstrap/Button';
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
@@ -148,8 +148,8 @@ export default function ListConsumers(){
                 dataIndex: 'estado',
                 key: 'estado',
                 render: (fila, row) => 
-                (fila === 'Activo') ? <Button type="danger" onClick={()=>BanWorkers(row._id)}>Desactivar</Button>:
-                <Button type="primary" onClick={()=>ActivateWorker(row._id)}>Activar</Button>
+                (fila === 'Activo') ? <Button variant="danger" onClick={()=>BanWorkers(row._id)}>Desactivar</Button>:
+                <Button variant="success" onClick={()=>ActivateWorker(row._id)}>Activar</Button>
             },
 
             

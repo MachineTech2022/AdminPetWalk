@@ -2,7 +2,9 @@ import React,{useState,useEffect} from "react";
 import {} from "react-router-dom"; 
 import './DiscountPlans.scss'
 import axios from 'axios';
-import { Table,Button,Input,notification,Modal,Form} from "antd";
+import { Table,Input,notification,Modal,Form} from "antd";
+import Button from 'react-bootstrap/Button';
+
 //Componentes
 import TitleHeader from "../component/TitleHeader";
 import Icons from "../component/Icons";
@@ -171,7 +173,7 @@ export default function DiscountPlans(){
             title:'Agregar Descuento',
             dataIndex:'acciones',
             key:'acciones',
-            render: (fila,row) => <><Button type="primary" onClick={()=> selectionDiscount(fila,row._id)} >Agregar Descuento</Button>
+            render: (fila,row) => <><Button variant="success" onClick={()=> selectionDiscount(fila,row._id)} >Agregar Descuento</Button>
             </>
         },
         {
@@ -179,8 +181,8 @@ export default function DiscountPlans(){
             dataIndex:'descuentoActivo',
             key:'descuentoActivo',
             render:(fila, row) => 
-            (fila === false) ? <Button onClick={()=> ActivateDiscount(row._id) } type="primary">Activar</Button>:
-            <Button type="danger" onClick={()=>DeactivateDiscount(row._id)} >Desactivar</Button>
+            (fila === false) ? <Button onClick={()=> ActivateDiscount(row._id) } variant="success">Activar</Button>:
+            <Button variant="danger" onClick={()=>DeactivateDiscount(row._id)} >Desactivar</Button>
         }
         
     ]
@@ -201,8 +203,8 @@ export default function DiscountPlans(){
             centered
             footer={[
                 <>
-                    <Button onClick={openCloseModalDiscount}>Cancelar</Button>
-                    <Button type="primary" onClick={putDiscount}>Añadir Descuento</Button>
+                    <Button variant="danger" onClick={openCloseModalDiscount}>Cancelar</Button>
+                    <Button variant="success" onClick={putDiscount}>Añadir Descuento</Button>
                 </>
             ]}
             >
