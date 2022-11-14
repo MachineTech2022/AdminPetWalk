@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 //Componentes
 import TitleHeader from "../component/TitleHeader"; 
-import Icons from "../component/Icons";
+
 import TextArea from "antd/lib/input/TextArea";
 
 let idGlobal='';
@@ -234,9 +234,7 @@ export default function ModifyDeactivatePlans(){
     return (
 
         <div>
-            <div className="icons1">
-                <Icons/>
-            </div>
+            
             <TitleHeader></TitleHeader>
             <br>
             </br>

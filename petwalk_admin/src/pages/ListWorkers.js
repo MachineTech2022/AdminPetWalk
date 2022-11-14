@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
-import Icons from "../component/Icons";
+
 
 export default function ListConsumers(){
 
@@ -157,9 +157,6 @@ export default function ListConsumers(){
     
     return(
         <>
-            <div className="icons1">
-                <Icons/>
-            </div>
             <TitleHeader></TitleHeader>            
             <Table dataSource={solicitudes} columns={columns}/>
         </>

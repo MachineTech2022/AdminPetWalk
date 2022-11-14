@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 
 //Componentes
 import TitleHeader from "../component/TitleHeader";
-import Icons from "../component/Icons";
 import moment from 'moment';
 
 let idGlobal='';
@@ -190,9 +189,6 @@ export default function DiscountPlans(){
 
     return(
         <div>
-            <div className="icons1">
-                <Icons/>
-            </div>
             <TitleHeader></TitleHeader>
             <Table dataSource={datos} columns={columns}/>
             <Modal

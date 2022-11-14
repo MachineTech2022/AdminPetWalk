@@ -2,7 +2,7 @@ import React from "react";
 import {Row,Layout} from "antd";
 import "./MenuDashboard.scss";
 //Importando componentes
-import Icons from "../component/Icons";
+
 import CardsDashboars from "../component/CardsDashboards";
 
 //Componente Title
@@ -14,9 +14,7 @@ export default function MenuDashboard(props){
 
     return(
         <Layout>
-            <div className="icons1">
-                <Icons/>
-            </div>
+            
             <Row className="title">
                 <TitleHeader/>
             </Row>
