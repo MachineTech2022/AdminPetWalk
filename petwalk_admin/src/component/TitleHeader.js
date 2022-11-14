@@ -27,7 +27,9 @@ export default function TitleHeader(){
               <NavDropdown.Item href="/ModifyDeactivatePlans">Listar Planes</NavDropdown.Item>
               <NavDropdown.Item href="/DiscountPlans">Descuentos Planes</NavDropdown.Item>
             </NavDropdown>
-            
+            <NavDropdown title="Consumidor" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/ReportUser">Reporte usuario</NavDropdown.Item>
+            </NavDropdown>
             
           </Nav>
         </Navbar.Collapse>
