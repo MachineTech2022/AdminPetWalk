@@ -125,6 +125,8 @@ function Test(){
                 fecha.push((boletas[i].fechaCompra).slice(0,10))
             }
         }
+
+        
         
             
         //fecha.push((boletas[i].fechaCompra).slice(0,10))
