@@ -7,6 +7,7 @@ import { Table,Button,notification} from "antd";
 import TitleHeader from "../component/TitleHeader";
 
 let fecha = []
+
 export default function ReportUser(){
 
     const [reportes, setReporte] = useState([])
@@ -112,15 +113,28 @@ export default function ReportUser(){
 
 
 function Test(){
+    fecha.length = fecha.length - fecha.length
     for(var i=0; i < boletas.length; i++){
+        
+        //Filtro de fechas distintas 
+        if ( i === 0){
+            fecha.push((boletas[i].fechaCompra).slice(0,10) )
+        }
+        else{
+            if((boletas[i].fechaCompra).slice(0,10) !== (boletas[i-1].fechaCompra).slice(0,10)){
+                fecha.push((boletas[i].fechaCompra).slice(0,10))
+            }
+        }
+        
             
         //fecha.push((boletas[i].fechaCompra).slice(0,10))
-        fecha.push({'fecha': (boletas[i].fechaCompra).slice(0,10) , 'total':(boletas[i].totalPagado)})
+        //fecha.push({'fecha': (boletas[i].fechaCompra).slice(0,10) , 'total':(boletas[i].totalPagado)})
         console.log((fecha))
         
-        //console.log(boletas[i].totalPagado)             
+                  
     }
-    console.log(typeof(boletas))
+    
+    //console.log(typeof(boletas))
 }
 
         
@@ -130,7 +144,7 @@ function Test(){
         <div>
             <TitleHeader/>
             <Table dataSource={reportes} data={consumers} columns={columns}/>
-            {/* <Button onClick={()=> Test()}>Test</Button> */}
+            <Button onClick={()=> Test()}>Test</Button>
         </div>
     )
 }
