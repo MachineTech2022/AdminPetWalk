@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+var fecha = []
 
 export default function Chart(){
   
@@ -13,83 +14,55 @@ export default function Chart(){
     useEffect(()=>{
             axios.get('http://localhost:4000/api/boleta/filtro')
             .then(res => {
-                setBoletas(res.data)
-                
-            })
-            
+                setBoletas(res.data)          
+            })         
             .catch(err=>{
                 console.log(err)
             })
         }, [])
   
-  console.log(boletas)
   
+
   function Test(){
-    for(var i=0; i < boletas.length; i++){
+    //Limpio el array antes de llenarlo nuevamente 
+    fecha.length = fecha.length - fecha.length
+
+    //Lleno el array con  fecha y tatal cortando la fecha para mostrarlo de una manera mas limpia
+    for(var i=0; i < boletas.length; i++){ 
             
-        console.log((boletas[i].fechaCompra).slice(0,10))
-
-    
-        //console.log(boletas[i].totalPagado)             
+        fecha.push({'fecha': (boletas[i].fechaCompra).slice(0,10) , 'total':(boletas[i].totalPagado)})
+               
     }
+
+    //Agreupar por fecha y sumar el total de las fechas que sean iguales 
+    const objDays = fecha.reduce((acum, item) => {
+        return !acum[item.fecha] 
+        ? {...acum, [item.fecha]: item.total} 
+        : { ...acum, [item.fecha]: acum[item.fecha] + item.total }
+        
+        
+        }, {})
+    console.log(objDays)
+    //fecha.length = fecha.length - fecha.length
+    
+    //creo data 
+    for(var x=0; x < Object.keys(objDays).length; x++){
+        fecha.push({'fecha':(Object.keys(objDays)[x]), 'total':((Object.values(objDays)[x]))}) 
+    }
+    //fecha.length = fecha.length - fecha.length
+    console.log('aqui')
 }
-  
 
-  /*const data = [
-    {
-      name: 'Fecha 1',
-      uv: 5000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ]; */
+Test()
 
-  
-  
-  
+
   return (
     <div className="chart">
         <ResponsiveContainer width="100%" height="100%">
     <LineChart
       width={500}
       height={300}
-      data={boletas}
+      data={fecha}
       margin={{
         top: 5,
         right: 30,
@@ -98,12 +71,12 @@ export default function Chart(){
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="fechaCompra" />
+      <XAxis dataKey="fecha" />
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="totalPagado" stroke="#8884d8" activeDot={{ r: 8 }} />
-      <Line type="monotone" dataKey="cantidadCoins" stroke="#82ca9d" />
+      <Line type="monotone" dataKey="total" stroke="#8884d8" activeDot={{ r: 8 }} />
+      {/*<Line type="monotone" dataKey="cantidadCoins" stroke="#82ca9d" />*/}
     </LineChart>
   </ResponsiveContainer>
     </div>

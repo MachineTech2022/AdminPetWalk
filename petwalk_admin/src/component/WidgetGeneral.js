@@ -57,7 +57,7 @@ const WidgetGeneral=({type})=>{
             
             num.push(boletas[i].totalPagado)
     
-            console.log(num)
+            
             //console.log(boletas[i].totalPagado)             
         }
         let total = num.reduce((a, b) => a + b, 0);

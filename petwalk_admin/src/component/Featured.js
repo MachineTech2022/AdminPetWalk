@@ -7,17 +7,7 @@ import "react-circular-progressbar/dist/styles.css"
 import {MoreOutlined,UpOutlined} from '@ant-design/icons';
 
 
-
-
-
-
 export default function Featured(){
-
-
-   
-
-
-    
 
     return(
         <div className="featured">

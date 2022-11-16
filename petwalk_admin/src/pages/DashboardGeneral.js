@@ -11,14 +11,6 @@ import Chart from "../component/Chart";
 
 export default function DashboardGeneral(props){
 
-
-    
-
-    
-    
-    
-
-
     return (
         <div>
             
