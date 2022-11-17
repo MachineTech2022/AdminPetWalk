@@ -87,7 +87,7 @@ export default function ListConsumers(){
                     return <>
                     <Input
                     autoFocus 
-                    placeholder="Search email"
+                    placeholder="Buscar email"
                     value={selectedKeys[0]} 
                     onChange={(e)=>{
                         setSelectedKeys(e.target.value ? [e.target.value]: [] );
@@ -104,14 +104,14 @@ export default function ListConsumers(){
                             {
                                 confirm();
                             }}
-                            type="primary">Search
+                            variant="primary">Buscar
                         </Button>
                         <Button id="buttonSearch" onClick={()=>
                             {
                                 clearFilters();
                                 confirm();
                             }}
-                            type="danger">Reset
+                            variant="danger">Cancelar
                         </Button>
                     </div>
                     </>

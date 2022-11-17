@@ -2,7 +2,8 @@ import  React,{ useEffect, useState} from "react";
 import './ListConsumers.scss';
 import '../.'
 import axios from 'axios';
-import { Table,Button,Input,notification} from "antd";
+import Button from 'react-bootstrap/Button';
+import { Table,Input,notification} from "antd";
 import {SearchOutlined} from '@ant-design/icons'
 
 //Componente Title
@@ -98,14 +99,14 @@ export default function ListConsumers(){
                             {
                                 confirm();
                             }}
-                            type="primary">Search
+                            variant="primary">Search
                         </Button>
                         <Button id="buttonSearch" onClick={()=>
                             {
                                 clearFilters();
                                 confirm();
                             }}
-                            type="danger">Reset
+                            variant="danger">Reset
                         </Button>
                     </div>
                     </>
@@ -138,8 +139,8 @@ export default function ListConsumers(){
                 dataIndex: 'activo',
                 key: 'activo',
                 render: (fila, row) => 
-                (fila === false) ? <Button onClick={()=> ActivateConsumers(row._id) } type="primary">Activar</Button>:
-                <Button type="danger" onClick={()=>BanConsumers(row._id)} >Desactivar</Button>
+                (fila === false) ? <Button onClick={()=> ActivateConsumers(row._id) } variant="primary">Activar</Button>:
+                <Button variant="danger" onClick={()=>BanConsumers(row._id)} >Desactivar</Button>
             },
             
         ]
