@@ -18,7 +18,6 @@ export default function TitleHeader(){
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className='bg-letras ' id="basic-navbar-nav">
           <Nav className="">
-            <Nav.Link href="/DashboardGeneral">Dashboard</Nav.Link>
             <NavDropdown title="Paseador" id="basic-nav-dropdown">
               <NavDropdown.Item href="/ListRequest">Solicitudes paseadores</NavDropdown.Item>
               <NavDropdown.Item href="/ListWorkers">Listar paseadores</NavDropdown.Item>
