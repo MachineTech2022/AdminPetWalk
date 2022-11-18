@@ -1,13 +1,54 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import "./Featured.scss";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"
+import axios from 'axios';
 
 
 import {MoreOutlined,UpOutlined} from '@ant-design/icons';
 
-
+let num=[]
 export default function Featured(){
+
+    const [boletas, setBoletas] = useState([])
+    useEffect(()=>{
+            axios.get('http://localhost:4000/api/boleta')
+            .then(res => {
+                setBoletas(res.data)
+                
+            })
+            
+            .catch(err=>{
+                console.log(err)
+            })
+        }, [])
+
+    function SumMonth(){
+        //Aun falta comparar fechas del mes y filtrar
+
+        num.length= num.length - num.length
+        for(var i=0; i < boletas.length; i++){
+            
+            num.push(boletas[i].totalPagado)
+    
+            
+            //console.log(boletas[i].totalPagado)             
+        }
+        let total = num.reduce((a, b) => a + b, 0);
+
+        //Formatear el total a CLP
+        const formatterPeso = new Intl.NumberFormat('es-CL', {
+            style: 'currency',
+            currency: 'CLP',
+            minimumFractionDigits: 0
+          })
+        
+        total =(formatterPeso.format(total))
+
+        return total
+    }
+
+
 
     return(
         <div className="featured">
@@ -34,7 +75,7 @@ export default function Featured(){
                         <div className="itemTitle">Last Month</div>
                         <div className="itemResult">
                              <UpOutlined fontSize="small"/>
-                            <div className="resultAmount">$554</div>
+                            <div className="resultAmount">{SumMonth()}</div>
                         </div>
                     </div>
                 </div>

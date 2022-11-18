@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from "react";
 import './ReportUser.scss';
 import axios from 'axios';
-import { Table,Button,notification} from "antd";
+import { Table} from "antd";
 
 //Componentes
 import TitleHeader from "../component/TitleHeader";
