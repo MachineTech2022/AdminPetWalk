@@ -91,6 +91,11 @@ export default function ReportUser(){
             dataIndex: 'descripcion',
             key: 'descripcion'
         },
+        {
+            title:'Banear',
+            dataIndex:'banear',
+            key:'banear'
+        }
         
     ]
     

@@ -1,8 +1,7 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 import './DashboardGeneral.scss';
-import axios from 'axios';
 
-import { Button} from "antd";
+
 
 //Componentes
 import TitleHeader from "../component/TitleHeader";
@@ -10,9 +9,7 @@ import WidgetGeneral from "../component/WidgetGeneral"
 import Featured from "../component/Featured";
 import Chart from "../component/Chart";
 
-//let limpieza=[];
-//let fechaFinal = []
-//var contador = 0;
+
 
 
 

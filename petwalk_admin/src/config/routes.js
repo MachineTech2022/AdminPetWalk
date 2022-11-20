@@ -8,6 +8,7 @@ import ModifyDeactivatePlans from "../pages/ModifyDeactivatePlans";
 import DiscountPlans from "../pages/DiscountPlans";
 import DashboardGeneral from "../pages/DashboardGeneral";
 import ReportUser from "../pages/ReportUser";
+import Prueba from "../pages/Prueba";
 import Error404 from "../pages/Error404";
 
 
@@ -67,6 +68,11 @@ const routes = [
     {
         path:"/ReportUser",
         component:ReportUser,
+        exact:true,
+    },
+    {
+        path:"/Prueba",
+        component:Prueba,
         exact:true,
     },
     {
