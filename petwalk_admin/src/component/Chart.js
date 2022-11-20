@@ -3,7 +3,7 @@ import "./Chart.scss";
 import axios from 'axios';
 
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer ,BarChart} from 'recharts';
 
 let limpieza = [];
 let fechaFinal = []
@@ -25,20 +25,20 @@ export default function Chart(props) {
 
   
 
-  console.log('primera', boletas.length)
+  
 
   function Test() {
     console.log('test ejecutado', boletas)
 
     //Limpio el array antes de llenarlo nuevamente 
 
-
+    limpieza.length = limpieza.length-limpieza.length
     //Lleno el array con  fecha y tatal cortando la fecha para mostrarlo de una manera mas limpia
     for (let s = 0; s < boletas.length; s++) {
-      limpieza.push({ 'fecha': (boletas[s].fechaCompra).slice(0, 10), 'total': (boletas[s].totalPagado) })
+      limpieza.push({ 'fecha': (boletas[s].fechaCompra).slice(0, 10), 'total': (boletas[s].totalPagado), 'coins':(boletas[s].cantidadCoins)})
     }
 
-
+    
 
     //Agrupar por fecha y sumar el total de las fechas que sean iguales 
     let objDays = limpieza.reduce((acum, item) => {
@@ -46,14 +46,22 @@ export default function Chart(props) {
         ? { ...acum, [item.fecha]: item.total }
         : { ...acum, [item.fecha]: acum[item.fecha] + item.total }
     }, {})
-    console.log(objDays)
+    
+
+    let objCoins = limpieza.reduce((acum, item) => {
+      return !acum[item.fecha]
+        ? { ...acum, [item.fecha]: item.coins }
+        : { ...acum, [item.fecha]: acum[item.fecha] + item.coins }
+    }, {})
+    
+    console.log(objCoins)
 
 
     fechaFinal.length = fechaFinal.length - fechaFinal.length
     //creo data 
     for (var x = 0; x < Object.keys(objDays).length; x++) {
-      fechaFinal.push({ 'Fecha': (Object.keys(objDays)[x]), 'Total': ((Object.values(objDays)[x])) })
-      console.log(fechaFinal)
+      fechaFinal.push({ 'Fecha': (Object.keys(objDays)[x]), 'Total': ((Object.values(objDays)[x])) ,'Coins': ((Object.values(objCoins)[x])) })
+      
     }
     
 
@@ -86,7 +94,7 @@ export default function Chart(props) {
             <Tooltip />
             <Legend />
             <Line type="monotone" dataKey="Total" stroke="#8884d8" activeDot={{ r: 8 }} />
-            {/*<Line type="monotone" dataKey="cantidadCoins" stroke="#82ca9d" />*/}
+            <Line type="monotone" dataKey="Coins" stroke="#82ca9d" />
           </LineChart>
         </ResponsiveContainer>
       </div>
