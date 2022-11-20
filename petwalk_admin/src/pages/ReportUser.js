@@ -1,12 +1,13 @@
 import React, {useEffect,useState} from "react";
 import './ReportUser.scss';
 import axios from 'axios';
-import { Table,Button,notification} from "antd";
+import { Table} from "antd";
 
 //Componentes
 import TitleHeader from "../component/TitleHeader";
 
-let fecha = []
+
+
 
 export default function ReportUser(){
 
@@ -69,10 +70,7 @@ export default function ReportUser(){
             
         }
     }
-    
-
-    
-
+       
     const columns= [
         {
             title: 'Nombre Cliente',
@@ -93,60 +91,20 @@ export default function ReportUser(){
             dataIndex: 'descripcion',
             key: 'descripcion'
         },
+        {
+            title:'Banear',
+            dataIndex:'banear',
+            key:'banear'
+        }
         
     ]
-
-    //Boletas filtradas ultimos 7 días 
-  const [boletas, setBoletas] = useState([])
-  useEffect(()=>{
-          axios.get('http://localhost:4000/api/boleta/filtro')
-          .then(res => {
-              setBoletas(res.data)
-              
-          })
-          
-          .catch(err=>{
-              console.log(err)
-          })
-      }, [])
-
-
-
-function Test(){
-    fecha.length = fecha.length - fecha.length
-    for(var i=0; i < boletas.length; i++){
-        
-        //Filtro de fechas distintas 
-        if ( i === 0){
-            fecha.push((boletas[i].fechaCompra).slice(0,10) )
-        }
-        else{
-            if((boletas[i].fechaCompra).slice(0,10) !== (boletas[i-1].fechaCompra).slice(0,10)){
-                fecha.push((boletas[i].fechaCompra).slice(0,10))
-            }
-        }
-
-        
-        
-            
-        //fecha.push((boletas[i].fechaCompra).slice(0,10))
-        //fecha.push({'fecha': (boletas[i].fechaCompra).slice(0,10) , 'total':(boletas[i].totalPagado)})
-        console.log((fecha))
-        
-                  
-    }
-    
-    //console.log(typeof(boletas))
-}
-
-        
     
 
     return (
         <div>
             <TitleHeader/>
             <Table dataSource={reportes} data={consumers} columns={columns}/>
-            <Button onClick={()=> Test()}>Test</Button>
+            
         </div>
     )
 }
