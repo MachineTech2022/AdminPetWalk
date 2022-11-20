@@ -3,14 +3,14 @@ import "./Chart.scss";
 import axios from 'axios';
 
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer ,BarChart} from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 
 let limpieza = [];
 let fechaFinal = []
-var contador = 0;
 
 
-export default function Chart(props) {
+
+export default function Chart() {
   //Boletas filtradas ultimos 7 días 
   const [boletas, setBoletas] = useState([])
   useEffect(() => {
@@ -27,8 +27,8 @@ export default function Chart(props) {
 
   
 
-  function Test() {
-    console.log('test ejecutado', boletas)
+  function DataFecha() {
+    
 
     //Limpio el array antes de llenarlo nuevamente 
 
@@ -47,14 +47,14 @@ export default function Chart(props) {
         : { ...acum, [item.fecha]: acum[item.fecha] + item.total }
     }, {})
     
-
+    //Agrupando coins por fecha 
     let objCoins = limpieza.reduce((acum, item) => {
       return !acum[item.fecha]
         ? { ...acum, [item.fecha]: item.coins }
         : { ...acum, [item.fecha]: acum[item.fecha] + item.coins }
     }, {})
     
-    console.log(objCoins)
+    
 
 
     fechaFinal.length = fechaFinal.length - fechaFinal.length
@@ -69,8 +69,8 @@ export default function Chart(props) {
 
   }
 
-  Test()
-  console.log(props.datos)
+  DataFecha()
+  
   if (boletas.length > 0) {
 
     return (

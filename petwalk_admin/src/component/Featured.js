@@ -7,7 +7,9 @@ import axios from 'axios';
 
 import {MoreOutlined,UpOutlined} from '@ant-design/icons';
 
-let num=[]
+
+let numLastMonth=[]
+let numCurrentMonth =[]
 export default function Featured(){
 
     const [boletas, setBoletas] = useState([])
@@ -22,30 +24,66 @@ export default function Featured(){
                 console.log(err)
             })
         }, [])
-
-    function SumMonth(){
-        //Aun falta comparar fechas del mes y filtrar
-
-        num.length= num.length - num.length
-        for(var i=0; i < boletas.length; i++){
-            
-            num.push(boletas[i].totalPagado)
     
+
+    
+    function CurrentMonth(){
+        
+        numCurrentMonth.length= numCurrentMonth.length - numCurrentMonth.length
+        const fechaActual = new Date();
+        const mesPasado = fechaActual.getMonth() + 1; 
+        
+        
+        
+        for (let s = 0; s < boletas.length; s++) {
+            if(mesPasado.toString() === (boletas[s].fechaCompra).slice(5, 7)){
+                numCurrentMonth.push((boletas[s].totalPagado) )
+            }
             
-            //console.log(boletas[i].totalPagado)             
-        }
-        let total = num.reduce((a, b) => a + b, 0);
+          }
+
+        console.log(numCurrentMonth)
+        let totalCurrentMonth = numCurrentMonth.reduce((a, b) => a + b, 0);
 
         //Formatear el total a CLP
         const formatterPeso = new Intl.NumberFormat('es-CL', {
             style: 'currency',
             currency: 'CLP',
             minimumFractionDigits: 0
-          })
-        
-        total =(formatterPeso.format(total))
+          })        
+        totalCurrentMonth =(formatterPeso.format(totalCurrentMonth))
 
-        return total
+        return totalCurrentMonth
+    }
+
+    
+    function SumMonthLast(){
+        
+        numLastMonth.length= numLastMonth.length - numLastMonth.length
+        const fechaActual = new Date();
+        const mesPasado = fechaActual.getMonth(); 
+        
+        
+        
+        for (let s = 0; s < boletas.length; s++) {
+            if(mesPasado.toString() === (boletas[s].fechaCompra).slice(5, 7)){
+                numLastMonth.push((boletas[s].totalPagado) )
+            }
+            
+          }
+
+        
+        let totalLastMonth = numLastMonth.reduce((a, b) => a + b, 0);
+
+        //Formatear el total a CLP
+        const formatterPeso = new Intl.NumberFormat('es-CL', {
+            style: 'currency',
+            currency: 'CLP',
+            minimumFractionDigits: 0
+          })        
+        totalLastMonth =(formatterPeso.format(totalLastMonth))
+
+        return totalLastMonth
     }
 
 
@@ -65,17 +103,17 @@ export default function Featured(){
                 <p className="descripcion">Descripción</p>
                 <div className="summary">
                     <div className="item">
-                        <div className="itemTitle">Last Week</div>
+                        <div className="itemTitle">Ventas Mes Actual</div>
                         <div className="itemResult">
                              <UpOutlined fontSize="small"/>
-                            <div className="resultAmount">$554</div>
+                            <div className="resultAmount">{CurrentMonth()}</div>
                         </div>
                     </div>
                     <div className="item">
-                        <div className="itemTitle">Last Month</div>
+                        <div className="itemTitle">Ventas Mes Anterior</div>
                         <div className="itemResult">
                              <UpOutlined fontSize="small"/>
-                            <div className="resultAmount">{SumMonth()}</div>
+                            <div className="resultAmount">{SumMonthLast()}</div>
                         </div>
                     </div>
                 </div>
