@@ -241,11 +241,7 @@ export default function ModifyDeactivatePlans(){
                 <div align='center'>
                     <Button variant="success" onClick={openCloseModalInsertar}>Añadir nuevo plan</Button>{' '}
                 </div>
-            <br>
-            </br>
-            <br>
-            </br>
-            <Table dataSource={datos} columns={columns}/>
+            <Table className="diseño-tabla" dataSource={datos} columns={columns}/>
             <Modal
             title="Añadir Nuevo Plan"
             visible={modalInsertar}

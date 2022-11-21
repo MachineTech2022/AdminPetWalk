@@ -190,7 +190,7 @@ export default function DiscountPlans(){
     return(
         <div>
             <TitleHeader></TitleHeader>
-            <Table dataSource={datos} columns={columns}/>
+            <Table className="diseño-tabla" dataSource={datos} columns={columns}/>
             <Modal
             title="Añadir Descuento"
             visible={modalDiscount}

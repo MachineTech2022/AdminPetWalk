@@ -132,7 +132,7 @@ export default function List(){
         <>
             
             <TitleHeader></TitleHeader>
-            <Table dataSource={solicitudes} columns={columns}/>
+            <Table className="diseño-tabla" dataSource={solicitudes} columns={columns}/>
              
         </>
     )

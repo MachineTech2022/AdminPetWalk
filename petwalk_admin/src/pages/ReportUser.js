@@ -103,7 +103,7 @@ export default function ReportUser(){
     return (
         <div>
             <TitleHeader/>
-            <Table dataSource={reportes} data={consumers} columns={columns}/>
+            <Table className="diseño-tabla" dataSource={reportes} data={consumers} columns={columns}/>
             
         </div>
     )

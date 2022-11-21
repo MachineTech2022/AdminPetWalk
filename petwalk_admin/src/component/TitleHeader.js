@@ -10,10 +10,11 @@ export default function TitleHeader(){
   return (
     <Navbar className='title'  expand="lg">
       <img 
-                        className="logo" 
-                        src={LogoPet}
-                        alt="LogoPet"
-                    />
+          className="logo" 
+          src={LogoPet}
+          alt="LogoPet"
+          href="/DashboardGeneral"
+      />
       <Container className='mg-0'>
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse className='bg-letras ' id="basic-navbar-nav">
@@ -40,7 +41,7 @@ export default function TitleHeader(){
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
               </svg>
             </Nav.Link>
-            <Nav.Link href="/MenuMajor"className='justify-content-end volver nav-botones hover'>
+            <Nav.Link href="/DashboardGeneral"className='justify-content-end volver nav-botones hover'>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
                 <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z"/>
               </svg>

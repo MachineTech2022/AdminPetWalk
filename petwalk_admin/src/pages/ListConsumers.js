@@ -148,7 +148,7 @@ export default function ListConsumers(){
     return(
         <>
             <TitleHeader></TitleHeader>
-            <Table dataSource={solicitudes} columns={columns}/>
+            <Table className="diseño-tabla" dataSource={solicitudes} columns={columns}/>
         </>
     )
 }
