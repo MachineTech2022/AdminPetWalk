@@ -91,7 +91,7 @@ export default function Featured(){
     return(
         <div className="featured">
             <div className="top">
-                <h1 className="titleRevenue">Total Revenue</h1>
+                <h1 className="titleRevenue">Reportes</h1>
                 <MoreOutlined className="moreOutlined"/>
             </div>
             <div className="bottom">

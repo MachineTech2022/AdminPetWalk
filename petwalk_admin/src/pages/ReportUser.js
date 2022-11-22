@@ -54,7 +54,7 @@ export default function ReportUser(){
     
 
     function MapCosumer(id){
-        for(var i=0; i < consumers.length; i++){
+        for(let i=0; i < consumers.length; i++){
             if(id === consumers[i]._id){
                 return (consumers[i].nombre)
             }
@@ -63,13 +63,24 @@ export default function ReportUser(){
     }
 
     function MapWorker(id){
-        for(var i=0; i < worker.length; i++){
+        for(let i=0; i < worker.length; i++){
             if(id === worker[i]._id){
                 return (worker[i].nombre)
             }
             
         }
     }
+
+
+    function MapState(id){
+        for(let i=0; i < worker.length; i++){
+            if(id === worker[i]._id){
+                return (worker[i].estado)
+            }
+        }
+    }
+
+    MapState()
        
     const columns= [
         {
@@ -95,6 +106,11 @@ export default function ReportUser(){
             title:'Banear',
             dataIndex:'banear',
             key:'banear'
+        },
+        {
+            title:'Ignorar Reporte',
+            dataIndex:'ignorar',
+            key:'ignorar'
         }
         
     ]
@@ -103,7 +119,7 @@ export default function ReportUser(){
     return (
         <div>
             <TitleHeader/>
-            <Table dataSource={reportes} data={consumers} columns={columns}/>
+            <Table  dataSource={reportes} data={consumers} columns={columns}/>
             
         </div>
     )
