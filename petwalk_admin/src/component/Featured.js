@@ -24,7 +24,45 @@ export default function Featured(){
                 console.log(err)
             })
         }, [])
+
+
     
+
+        const [allReportes, setallReporte] = useState([])
+        useEffect(()=>{
+                axios.get('http://localhost:4000/api/reporte')
+                .then(res => {
+                    setallReporte(res.data)
+                    
+                })
+                
+                .catch(err=>{
+                    console.log(err)
+                })
+            }, [])
+        
+        
+
+        const [reportes, setReporte] = useState([])
+         useEffect(()=>{
+                axios.get('http://localhost:4000/api/reporte/reporteActivo')
+                .then(res => {
+                    setReporte(res.data)
+                
+                })
+            
+                .catch(err=>{
+                    console.log(err)
+                })
+            }, [])
+        
+        function Porcentaje(){
+            let porcentaje = (reportes.length / allReportes.length) *100
+            return(100-(Math.trunc(porcentaje)))  
+        }
+    
+        
+
 
     
     function CurrentMonth(){
@@ -39,10 +77,9 @@ export default function Featured(){
             if(mesPasado.toString() === (boletas[s].fechaCompra).slice(5, 7)){
                 numCurrentMonth.push((boletas[s].totalPagado) )
             }
-            
           }
 
-        console.log(numCurrentMonth)
+        
         let totalCurrentMonth = numCurrentMonth.reduce((a, b) => a + b, 0);
 
         //Formatear el total a CLP
@@ -86,7 +123,7 @@ export default function Featured(){
         return totalLastMonth
     }
 
-
+    console.log("asAS")
 
     return(
         <div className="featured">
@@ -96,11 +133,11 @@ export default function Featured(){
             </div>
             <div className="bottom">
                 <div className="featuredChart">
-                    <CircularProgressbar value={70} text={"70%"} strokeWidth={5}/>
+                    <CircularProgressbar value={Porcentaje()} text={"%"+Porcentaje()} strokeWidth={5}/>
                 </div>
-                <p  className="title1">Total</p>
-                <p className="amount">$400</p>
-                <p className="descripcion">Descripción</p>
+                <p  className="title1">Porcentaje revisados</p>
+                <p className="amount">{reportes.length}</p>
+                <p className="descripcion">Reportes por revisar</p>
                 <div className="summary">
                     <div className="item">
                         <div className="itemTitle">Ventas Mes Actual</div>

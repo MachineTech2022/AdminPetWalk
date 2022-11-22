@@ -19,7 +19,7 @@ export default function Login(){
                 return response;
             }).then(result=>{
                 //console.log(result.status)
-                window.location.href='/MenuMajor';
+                window.location.href='/DashboardGeneral';
                 return result.status;
             })
             .catch(err =>{
