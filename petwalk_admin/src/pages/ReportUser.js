@@ -1,7 +1,8 @@
 import React, {useEffect,useState} from "react";
 import './ReportUser.scss';
 import axios from 'axios';
-import { Table, Button, notification} from "antd";
+import Button from 'react-bootstrap/Button';
+import { Table, notification} from "antd";
 
 //Componentes
 import TitleHeader from "../component/TitleHeader";
@@ -132,13 +133,13 @@ export default function ReportUser(){
             title:'Banear',
             dataIndex:'banear',
             key:'banear',
-            render: (fila,row)=> <Button onClick={()=> BanWorkers(row.idTrabajador,row._id)}>Banear Paseador</Button>
+            render: (fila,row)=> <Button variant="danger" onClick={()=> BanWorkers(row.idTrabajador,row._id)}>Banear Paseador</Button>
         },
         {
             title:'Ignorar',
             dataIndex:'ignorar',
             key:'ignorar',
-            render: (fila, row)=> <Button onClick={()=> IgnoreReport(row._id)}>Ignorar</Button>
+            render: (fila, row)=> <Button variant="primary" onClick={()=> IgnoreReport(row._id)}>Ignorar</Button>
         }
         
     ]

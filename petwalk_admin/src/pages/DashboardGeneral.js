@@ -69,7 +69,7 @@ export default function DashboardGeneral(props){
     return (
         <div>
             
-            <TitleHeader></TitleHeader>
+            <TitleHeader></TitleHeader>            
             <div className="containerWidget">
                 <WidgetGeneral type="usersWorker"/>
                 <WidgetGeneral type="userConsumers"/>
@@ -78,6 +78,7 @@ export default function DashboardGeneral(props){
             </div>
             <div className="charts">
                 <Featured/>
+                
                 <Chart  />
             </div>
             
