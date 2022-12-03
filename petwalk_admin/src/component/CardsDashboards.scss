@@ -1,0 +1,19 @@
+@import "../scss/index.scss";
+
+
+
+.content-target{
+    display: flex;
+    height: 480px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 70px;
+    margin-left: 110px;
+    .target{ 
+        width: 180px;
+        height: 180px;
+        border-radius: 10px;
+        margin-left: 50px;
+    }
+    
+}

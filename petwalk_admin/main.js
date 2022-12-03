@@ -5,12 +5,13 @@ const path = require('path')
 function createWindow() {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
-        width: 520,
+        width: 1200,
         height: 660,
         resizable: false,
         maximizable: false,
         fullscreenable: false,
-        frame: false,
+        icon: __dirname + '/favicon.ico',
+        //frame: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
