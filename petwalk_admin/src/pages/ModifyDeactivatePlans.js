@@ -3,7 +3,7 @@ import './ModifyDeactivatePlans.scss';
 import axios from 'axios';
 import { Table,Input,notification,Modal,Form,message} from "antd";
 import Button from 'react-bootstrap/Button';
-
+import node from '../config/varGlobal';
 //Componentes
 import TitleHeader from "../component/TitleHeader"; 
 
@@ -15,7 +15,7 @@ export default function ModifyDeactivatePlans(){
     //Funcion para activar cuentas de consumidor
     function ActivatePlan(id){
         console.log(id)
-        axios.patch(' http://localhost:4000/api/plan/activar/'+id)
+        axios.patch( node + '/api/plan/activar/'+id)
         notification['success']({
             message:'Cuenta Activada'
         })
@@ -24,7 +24,7 @@ export default function ModifyDeactivatePlans(){
     }
     //Funcion para boton de banear a consumidor
     function DeactivatePlan(id){
-        axios.patch('http://localhost:4000/api/plan/desactivar/'+id)
+        axios.patch(node + '/api/plan/desactivar/'+id)
         notification['success']({
             message:'Plan desactivado'
         })
@@ -54,7 +54,7 @@ export default function ModifyDeactivatePlans(){
 
     //Funcion para añadir un nuevo plan por la api de Node
     function postPlan(data){
-        const url= "http://localhost:4000/api/plan";    
+        const url= node + "/api/plan";    
         console.log(data)
         if( data.costo === "" || data.encabezado === "" || data.descripcion === "" || data.cantidadCoins === ""){
             notification['error']({
@@ -120,7 +120,7 @@ export default function ModifyDeactivatePlans(){
                             elemento.descripcion= inputs.descripcion;
                             elemento.cantidadCoins= inputs.cantidadCoins;
                             
-                            axios.put('http://localhost:4000/api/plan/'+idGlobal , inputs)
+                            axios.put(node + '/api/plan/'+idGlobal , inputs)
                             openCloseModalEditar();
                             setTimeout(ReloadPage,800)
                             notification['success']({
@@ -181,7 +181,7 @@ export default function ModifyDeactivatePlans(){
 
     //Para consumir api de Node y listar
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/plan')
+            axios.get(node + '/api/plan')
             .then(res => {
                 setDatos(res.data)
                 
@@ -241,7 +241,7 @@ export default function ModifyDeactivatePlans(){
                 <div align='center'>
                     <Button variant="success" onClick={openCloseModalInsertar}>Añadir nuevo plan</Button>{' '}
                 </div>
-            <Table className="diseño-tabla" dataSource={datos} columns={columns}/>
+            <Table className="tabla" dataSource={datos} columns={columns}/>
             <Modal
             title="Añadir Nuevo Plan"
             visible={modalInsertar}

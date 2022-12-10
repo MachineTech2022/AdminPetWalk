@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import "./WidgetGeneral.scss";
 import {UpOutlined,UserOutlined,ShoppingCartOutlined} from '@ant-design/icons';
 import axios from 'axios';
-
+import node from '../config/varGlobal';
 
 let num = [];
 const WidgetGeneral=({type})=>{
@@ -11,7 +11,7 @@ const WidgetGeneral=({type})=>{
     // Consumidores
     const [consumidores, getConsumidores] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/consumidor')
+            axios.get(node + '/api/consumidor')
             .then(res => {
                 getConsumidores(res.data)
                 
@@ -25,7 +25,7 @@ const WidgetGeneral=({type})=>{
     // Solicitudes de trabajadores    
     const [solicitudes, setSolicitud] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/trabajador')
+            axios.get(node + '/api/trabajador')
             .then(res => {
                 setSolicitud(res.data)
                 
@@ -40,7 +40,7 @@ const WidgetGeneral=({type})=>{
     // Boletas 
     const [boletas, setBoletas] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/boleta')
+            axios.get(node + '/api/boleta')
             .then(res => {
                 setBoletas(res.data)
                 
@@ -81,7 +81,7 @@ const WidgetGeneral=({type})=>{
 
     const [worker, setWorkers] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/trabajador/all')
+            axios.get(node + '/api/trabajador/all')
             .then(res => {
                 setWorkers(res.data)
                 

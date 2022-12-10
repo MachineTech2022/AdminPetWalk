@@ -4,7 +4,7 @@ import './Login.scss'
 import axios from 'axios';
 import {Row,Form,Input,Button,message} from 'antd';
 import LogoPet from '../assets/img/LogoPet.png'
-
+import node from '../config/varGlobal';
 //Componente Title
 
 export default function Login(){
@@ -13,7 +13,7 @@ export default function Login(){
 
 
     function ApiLogin(data){
-        const url= "http://localhost:4000/api/admin/login";
+        const url= node + "/api/admin/login";
         
         axios.post(url,data).then(response => {
                 return response;

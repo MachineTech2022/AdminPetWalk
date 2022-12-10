@@ -3,7 +3,7 @@ import './ListRequest.scss';
 import axios from 'axios';
 import { Table,Tag,notification} from "antd";
 import Button from 'react-bootstrap/Button';
-
+import node from '../config/varGlobal'
 
 
 //Componente Title
@@ -18,7 +18,7 @@ export default function List(){
     }
 
     function AceptarSolicitud(id){
-        axios.patch('http://localhost:4000/api/trabajador/aceptar/'+id)
+        axios.patch(node + '/api/trabajador/aceptar/'+id)
         notification['success']({
             message:'Solicitud Aceptada'
         })
@@ -30,7 +30,7 @@ export default function List(){
     }
     
     function RechazarSolicitud(id){
-        axios.patch('http://localhost:4000/api/trabajador/rechazar/'+id)
+        axios.patch( node + '/api/trabajador/rechazar/'+id)
         notification['success']({
             message:'Solicitud Rechazada'
         })
@@ -43,7 +43,7 @@ export default function List(){
     //Para consumir la api de Node
     const [solicitudes, setSolicitud] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/trabajador')
+            axios.get( node + '/api/trabajador')
             .then(res => {
                 setSolicitud(res.data)
                 
@@ -55,7 +55,7 @@ export default function List(){
         }, [])
 
         
-         
+        
 
     
     
@@ -82,7 +82,7 @@ export default function List(){
                 key: 'genero'
             },
             {
-                title: 'Telefono',
+                title: 'Teléfono',
                 dataIndex: 'telefono',
                 key: 'telefono'
             },
@@ -110,11 +110,11 @@ export default function List(){
                 title: 'Documentos',
                 dataIndex: "documentos",
                 key: "documentos",
-                render: fila => <><a href={"http://localhost:4000/" + fila[0]} target={"_blank"} rel={"noreferrer noopener"}>
+                render: fila => <><a href={node +'/' + fila[0]} target={"_blank"} rel={"noreferrer noopener"}>
                     <Tag className="tagDocumento" color={'yellow'}>Antecedentes</Tag></a>
-                <a href={"http://localhost:4000/" + fila[1]} target={"_blank"} rel={"noreferrer noopener"}>
+                <a href={node +'/' + fila[1]} target={"_blank"} rel={"noreferrer noopener"}>
                     <Tag className="tagDocumento1" color={'yellow'}>Foto Carnet A</Tag></a>
-                <a href={"http://localhost:4000/" + fila[2]} target={"_blank"} rel={"noreferrer noopener"}>
+                <a href={node +'/' + fila[2]} target={"_blank"} rel={"noreferrer noopener"}>
                     <Tag className="tagDocumento2" color={'yellow'}>Foto Carnet B</Tag></a>
                 </>
             },

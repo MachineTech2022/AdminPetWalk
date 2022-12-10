@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Chart.scss";
 import axios from 'axios';
-
+import node from '../config/varGlobal';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 
@@ -14,7 +14,7 @@ export default function Chart() {
   //Boletas filtradas ultimos 7 días 
   const [boletas, setBoletas] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:4000/api/boleta/filtro')
+    axios.get(node + '/api/boleta/filtro')
       .then(res => {
         setBoletas([...res.data])
       })
@@ -74,9 +74,11 @@ export default function Chart() {
   if (boletas.length > 0) {
 
     return (
-
+      
       <div className="chart">
+                
         <ResponsiveContainer width="100%" height="100%">
+
           <LineChart
             width={500}
             height={300}
@@ -88,6 +90,7 @@ export default function Chart() {
               bottom: 5,
             }}
           >
+            
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="Fecha" />
             <YAxis />
@@ -95,6 +98,7 @@ export default function Chart() {
             <Legend />
             <Line type="monotone" dataKey="Total" stroke="#8884d8" activeDot={{ r: 8 }} />
             <Line type="monotone" dataKey="Coins" stroke="#82ca9d" />
+            
           </LineChart>
         </ResponsiveContainer>
       </div>

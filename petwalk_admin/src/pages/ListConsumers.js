@@ -4,7 +4,8 @@ import '../.'
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { Table,Input,notification} from "antd";
-import {SearchOutlined} from '@ant-design/icons'
+import {SearchOutlined} from '@ant-design/icons';
+import node from '../config/varGlobal';
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
@@ -17,7 +18,7 @@ export default function ListConsumers(){
     //Funcion para activar cuentas de consumidor
     function ActivateConsumers(id){
         console.log(id)
-        axios.patch(' http://localhost:4000/api/consumidor/activar/'+id)
+        axios.patch(node + '/api/consumidor/activar/'+id)
         notification['success']({
             message:'Cuenta Activada'
         })
@@ -26,7 +27,7 @@ export default function ListConsumers(){
     }
     //Funcion para boton de banear a consumidor
     function BanConsumers(id){
-        axios.patch('http://localhost:4000/api/consumidor/banear/'+id)
+        axios.patch(node + '/api/consumidor/banear/'+id)
         notification['success']({
             message:'Cuenta Baneada'
         })
@@ -38,7 +39,7 @@ export default function ListConsumers(){
     //Para consumir la api de Node
     const [solicitudes, setSolicitud] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/consumidor')
+            axios.get( node + '/api/consumidor/')
             .then(res => {
                 setSolicitud(res.data)
                 
@@ -70,7 +71,7 @@ export default function ListConsumers(){
                 key: 'comuna'
             },
             {
-                title: 'Telefono',
+                title: 'Teléfono',
                 dataIndex: 'telefono',
                 key: 'telefono'
             },

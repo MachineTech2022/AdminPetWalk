@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Table,notification,Input} from "antd";
 import {SearchOutlined} from '@ant-design/icons';
 import Button from 'react-bootstrap/Button';
+import node from '../config/varGlobal'
 
 //Componente Title
 import TitleHeader from "../component/TitleHeader"; 
@@ -17,7 +18,7 @@ export default function ListConsumers(){
 
     function ActivateWorker(id){
         console.log(id)
-        axios.patch('http://localhost:4000/api/trabajador/activar/'+id)
+        axios.patch(node + '/api/trabajador/activar/'+id)
         notification['success']({
             message:'Cuenta Activada'
         })
@@ -25,10 +26,12 @@ export default function ListConsumers(){
         setTimeout(ReloadPage,800)
         
     }
+
+    console.log(node)
     
     function BanWorkers(id){
         console.log(id)
-        axios.patch('http://localhost:4000/api/trabajador/banear/'+id)
+        axios.patch(node + '/api/trabajador/banear/'+id)
         notification['success']({
             message:'Cuenta Baneada'
         })
@@ -41,7 +44,7 @@ export default function ListConsumers(){
     //Para consumir la api de Node
     const [solicitudes, setSolicitud] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/trabajador/all')
+            axios.get(node + '/api/trabajador/all')
             .then(res => {
                 setSolicitud(res.data)
                 
@@ -75,7 +78,7 @@ export default function ListConsumers(){
                 key: 'comuna'
             },
             {
-                title: 'Telefono',
+                title: 'Teléfono',
                 dataIndex: 'telefono',
                 key: 'telefono'
             },
@@ -161,5 +164,4 @@ export default function ListConsumers(){
             <Table className="diseño-tabla" dataSource={solicitudes} columns={columns}/>
         </>
     )
-}/*(fila === false) ? <Button type="primary">Activar</Button>:
-                <Button onClick={()=>(row._id)} type='danger' >Desactivar</Button>*/ 
+}

@@ -1,8 +1,9 @@
 import React, {useEffect,useState} from "react";
 import './ReportUser.scss';
 import axios from 'axios';
-import { Table, Button, notification} from "antd";
-
+import Button from 'react-bootstrap/Button';
+import { Table, notification} from "antd";
+import node from '../config/varGlobal';
 //Componentes
 import TitleHeader from "../component/TitleHeader";
 
@@ -17,7 +18,7 @@ export default function ReportUser(){
 
     const [reportes, setReporte] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/reporte/reporteActivo')
+            axios.get(node + '/api/reporte/reporteActivo')
             .then(res => {
                 setReporte(res.data)
                 
@@ -34,7 +35,7 @@ export default function ReportUser(){
 
     const [consumers, setConsumers] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/consumidor')
+            axios.get(node + '/api/consumidor')
             .then(res => {
                 setConsumers(res.data)
                 
@@ -48,7 +49,7 @@ export default function ReportUser(){
 
     const [worker, setWorker] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/trabajador/all')
+            axios.get(node + '/api/trabajador/all')
             .then(res => {
                 setWorker(res.data)
                 
@@ -61,7 +62,7 @@ export default function ReportUser(){
     
     //Función para desactivar el reporte
     function IgnoreReport(id){
-        axios.patch('http://localhost:4000/api/reporte/reporteDesactivar/'+id)
+        axios.patch(node + '/api/reporte/reporteDesactivar/'+id)
         notification['success']({
             message:'Reporte Ignorado'
         })
@@ -73,12 +74,12 @@ export default function ReportUser(){
     // Se banea al trabajador y se cambia el estado del reporte
     function BanWorkers(idTrabajador,idReporte){
         console.log(idTrabajador)
-        axios.patch('http://localhost:4000/api/trabajador/banear/'+idTrabajador)
+        axios.patch(node + '/api/trabajador/banear/'+idTrabajador)
         notification['success']({
             message:'Cuenta Baneada'
         })
 
-        axios.patch('http://localhost:4000/api/reporte/reporteDesactivar/'+idReporte)
+        axios.patch(node + '/api/reporte/reporteDesactivar/'+idReporte)
         
         
         setTimeout(ReloadPage,800)
@@ -114,14 +115,14 @@ export default function ReportUser(){
             dataIndex: 'descripcion',
             key: 'descripcion',
             render: (fila,row)=>  <p>{MapCosumer(row.idConsumidor)}</p>
-            //<Button  onClick={()=> Test(row.idConsumidor)} >Test</Button>
+           
         },
         {
             title: 'Nombre Paseador Reportado',
             dataIndex: 'descripcion',
             key: 'descripcion',
             render: (fila,row)=>  <p>{MapWorker(row.idTrabajador)}</p>
-            //<Button  onClick={()=> Test(row.idConsumidor)} >Test</Button>
+            
         },
         {
             title: 'Descripción',
@@ -132,13 +133,13 @@ export default function ReportUser(){
             title:'Banear',
             dataIndex:'banear',
             key:'banear',
-            render: (fila,row)=> <Button onClick={()=> BanWorkers(row.idTrabajador,row._id)}>Banear Paseador</Button>
+            render: (fila,row)=> <Button variant="danger" onClick={()=> BanWorkers(row.idTrabajador,row._id)}>Banear Paseador</Button>
         },
         {
             title:'Ignorar',
             dataIndex:'ignorar',
             key:'ignorar',
-            render: (fila, row)=> <Button onClick={()=> IgnoreReport(row._id)}>Ignorar</Button>
+            render: (fila, row)=> <Button variant="primary" onClick={()=> IgnoreReport(row._id)}>Ignorar</Button>
         }
         
     ]

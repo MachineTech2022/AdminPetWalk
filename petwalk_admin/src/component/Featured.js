@@ -3,7 +3,7 @@ import "./Featured.scss";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css"
 import axios from 'axios';
-
+import node from '../config/varGlobal';
 
 import {MoreOutlined,UpOutlined} from '@ant-design/icons';
 
@@ -14,7 +14,7 @@ export default function Featured(){
 
     const [boletas, setBoletas] = useState([])
     useEffect(()=>{
-            axios.get('http://localhost:4000/api/boleta')
+            axios.get(node + '/api/boleta')
             .then(res => {
                 setBoletas(res.data)
                 
@@ -30,7 +30,7 @@ export default function Featured(){
 
         const [allReportes, setallReporte] = useState([])
         useEffect(()=>{
-                axios.get('http://localhost:4000/api/reporte')
+                axios.get(node + '/api/reporte')
                 .then(res => {
                     setallReporte(res.data)
                     
@@ -45,7 +45,7 @@ export default function Featured(){
 
         const [reportes, setReporte] = useState([])
          useEffect(()=>{
-                axios.get('http://localhost:4000/api/reporte/reporteActivo')
+                axios.get(node + '/api/reporte/reporteActivo')
                 .then(res => {
                     setReporte(res.data)
                 

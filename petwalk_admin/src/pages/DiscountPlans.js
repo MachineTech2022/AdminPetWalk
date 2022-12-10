@@ -4,6 +4,8 @@ import './DiscountPlans.scss'
 import axios from 'axios';
 import { Table,Input,notification,Modal,Form} from "antd";
 import Button from 'react-bootstrap/Button';
+import node from '../config/varGlobal';
+
 
 //Componentes
 import TitleHeader from "../component/TitleHeader";
@@ -27,7 +29,7 @@ export default function DiscountPlans(){
 
     //Para consumir api de Node y listar
     useEffect(()=>{
-        axios.get('http://localhost:4000/api/plan')
+        axios.get(node + '/api/plan')
         .then(res => {
             setDatos(res.data)
             
@@ -104,7 +106,7 @@ export default function DiscountPlans(){
                         console.log(elemento.fechaTermino)
                         
 
-                        axios.put('http://localhost:4000/api/plan/crearDescuento/'+idGlobal,inputs)
+                        axios.put(node + '/api/plan/crearDescuento/'+idGlobal,inputs)
                         openCloseModalDiscount();
                         setTimeout(ReloadPage,800)
                         notification['success']({
@@ -125,7 +127,7 @@ export default function DiscountPlans(){
     //Funcion para activar cuentas de consumidor
     function ActivateDiscount(id){
         console.log(id)
-        axios.patch(' http://localhost:4000/api/plan/descuento/activar/'+id)
+        axios.patch(node + '/api/plan/descuento/activar/'+id)
         notification['success']({
             message:'Descuento Activada'
         })
@@ -134,7 +136,7 @@ export default function DiscountPlans(){
     }
     //Funcion para boton de banear a consumidor
     function DeactivateDiscount(id){
-        axios.patch('http://localhost:4000/api/plan/descuento/desactivar/'+id)
+        axios.patch(node + '/api/plan/descuento/desactivar/'+id)
         notification['success']({
             message:'Descuento desactivado'
         })
@@ -164,7 +166,7 @@ export default function DiscountPlans(){
             key:'porcentajeDescuento'
         },
         {
-            title:'Fecha Termino',
+            title:'Fecha Término',
             dataIndex:'fechaTermino',
             key:'fechaTermino'
         },
